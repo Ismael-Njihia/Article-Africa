@@ -1,0 +1,8 @@
+.card-title {
+    height: 50px;
+  }
+
+  .react-quill {
+    height: calc(100% - 50px); 
+    border: 1px solid #ccc; 
+  }
