@@ -3,9 +3,13 @@ import mongoose from 'mongoose'
 const articleSchema = mongoose.Schema({
     title: {
         type: String,
+        required: true,
+        unique: true
+    },
+    titleLowercase: {
+        type: String,
         required: true
     },
-    // The author is a reference to the User model
     //category comes from the Category model
     category: {
         type: mongoose.Schema.Types.ObjectId,

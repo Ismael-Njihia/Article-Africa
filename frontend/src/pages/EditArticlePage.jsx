@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Col, Row, Container, Form, Card, Button } from 'react-bootstrap';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+
+import axios from 'axios';
 
 const EditArticlePage = () => {
   // State to manage form fields
@@ -9,12 +11,42 @@ const EditArticlePage = () => {
   const [category, setCategory] = useState('');
   const [body, setBody] = useState('');
 
+  //load the categories using axios
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const { data } = await axios.get('/api/categories');
+      //get categories name only
+      const categoryName = data.map((category) => category.name);  
+      setCategories(categoryName);
+    };
+    fetchCategories();
+  }, []);
+  
+
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You can handle form submission logic here
-    // For example, sending data to a server
-    console.log({ title, category, body });
+
+    const articleData = {
+      title,
+      category,
+      body,
+    }; 
+    // Post article to backend
+    axios
+      .post('/api/articles', articleData)
+      .then((response) => {
+        alert('Article published successfully');
+        setTitle('');
+        setCategory('');
+        setBody('');
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error.response.data.message)
+      });
   };
 
   return (
@@ -46,10 +78,10 @@ const EditArticlePage = () => {
                     onChange={(e) => setCategory(e.target.value)}
                     required
                   >
-                    <option value="">Select category...</option>
-                    <option value="category1">Category 1</option>
-                    <option value="category2">Category 2</option>
-                    {/* Add more categories as needed */}
+                    <option value="">Select a category</option>
+                    {categories.map((category) => (
+                      <option key={category}>{category}</option>
+                    ))}
                   </Form.Control>
                 </Form.Group>
 
@@ -70,7 +102,7 @@ const EditArticlePage = () => {
             </Card.Body>
             <br />
             <Card.Footer>
-              <Button variant="primary" type="submit">
+              <Button variant="primary" onClick={handleSubmit} type="submit">
                 Publish Article
               </Button>
             </Card.Footer>
