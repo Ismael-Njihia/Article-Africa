@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import User from './UserModel'
 
 const articleSchema = mongoose.Schema({
     title: {
@@ -10,7 +11,6 @@ const articleSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    //category comes from the Category model
     category: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -19,6 +19,11 @@ const articleSchema = mongoose.Schema({
     body: {
         type: String,
         required: true
+    },
+    postedBy:{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: User
     }
 }, {timestamps: true})
 
