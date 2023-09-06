@@ -7,6 +7,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import EditArticlePage from './pages/EditArticlePage';
+import Login from './pages/Login';
 
 
 const routes = createBrowserRouter(
@@ -14,6 +15,7 @@ const routes = createBrowserRouter(
     <>
     <Route path="/" element={<App />} />
     <Route path='/articles/edit' element={<EditArticlePage />} />
+    <Route path='aa/user/login' element={<Login />} />
     </>
    
   )

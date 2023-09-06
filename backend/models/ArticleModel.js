@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import User from './UserModel'
+import User from './UserModel.js'
 
 const articleSchema = mongoose.Schema({
     title: {
