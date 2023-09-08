@@ -2,8 +2,98 @@
   margin: 0;
   padding: 0;
 }
+/*Color variables*/
+:root {
+    --primary-color: #004225;
+    --secondary-color: #1a1a1a;
+    --tertiary-color: #ffffff;
+    --quaternary-color: #ffffff80;
+    --quinary-color: #ffffff40;
+    --senary-color: #ffffff20;
+    --septenary-color: #ffffff10;
+    --octonary-color: #ffffff08;
+    --nonary-color: #ffffff04;
+    --denary-color: #ffffff02;
+  }
+  
+  /*General*/
+  body {
+    background-color: var(--primary-color);
+    color: var(--tertiary-color);
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  a {
+    color: var(--tertiary-color);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: var(--quaternary-color);
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--secondary-color);
+    color: var(--tertiary-color);
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    background-color: var(--quaternary-color);
+  }
+  
+  .btn:disabled {
+    background-color: var(--senary-color);
+    color: var(--quinary-color);
+    cursor: not-allowed;
+  }
+  
+  .btn-primary {
+    background-color: var(--primary-color);
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--primary-color);
+  }
+  
+  .btn-primary:disabled {
+    background-color: var(--primary-color);
+  }
+  
+  .btn-secondary {
+    background-color: var(--secondary-color);
+  }
+  
+  .btn-secondary:hover {
+    background-color: var(--secondary-color);
+  }
+  
+  .btn-secondary:disabled {
+    background-color: var(--secondary-color);
+  }
+  
+  .btn-tertiary {
+    background-color: var(--tertiary-color);
+  }
+  
+  .btn  
 .card-title {
-    height: 50px;
+    height: 30px;
+    
   }
 
   .react-quill {
@@ -17,8 +107,7 @@
     list-style-type: none;
     display: flex;
     justify-content: flex-end;
-    align-items: center;
-    margin-right: 20px; 
+    margin-left: auto;
   }
   
   .top-links a {
@@ -34,13 +123,28 @@
   .Header{
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    
     background-color: #1a1a1a;
-    height: 50px;
    padding: 10px;
    width: 100%;
   }
-  .header-wrapper{
-   
-    width: 100%;
+  .offcanvas {
+    background-color: var(--primary-color);
+    color: var(--nonary-color);
+    font-size: 16px;
   }
+  .offcanvas a {
+    color: var(--tertiary-color);
+  }
+  
+  .navbar-toggler-icon {
+    width: 1.0em;
+    height: 1.0em;
+  }
+  /*remove ugly outline*/
+  .navbar-toggler:focus {
+    outline: none;
+  }
+
+
+  

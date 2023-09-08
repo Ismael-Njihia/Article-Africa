@@ -68,7 +68,7 @@ const EditArticlePage = () => {
       <h3 style={{textAlign: 'center'}}>Publish an Article for Article Africa</h3>
       <Row className="justify-content-center">
         <Col md={8}>
-          <Card style={{height: '700px'}}>
+          <Card style={{height: '750px'}}>
             <Card.Body>
               
               <Form onSubmit={handleSubmit}>
@@ -109,17 +109,18 @@ const EditArticlePage = () => {
                     onChange={setBody}
                     theme="snow" // You can change the theme if needed
                   />
+            
                 </Form.Group>
-                   <br />
+                <br />
+                
               </Form>
               
             </Card.Body>
-            <br />
-            <Card.Footer>
-              <Button variant="primary" onClick={handleSubmit} type="submit">
-                Publish Article
-              </Button>
-            </Card.Footer>
+            <Button variant="primary" className= "sm" onClick={handleSubmit} type="submit" block>
+                    Publish Article
+                  </Button>
+              
+            
           </Card>
         </Col>
       </Row>
