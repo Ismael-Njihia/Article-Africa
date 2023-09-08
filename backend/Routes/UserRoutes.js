@@ -1,6 +1,6 @@
 import User from "../models/UserModel.js";
 import express from "express";
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
@@ -15,12 +15,16 @@ router.post('/', async (req, res) => {
         
         //match password
         if (user.password == password){
-            res.status(200).json({ message: 'Login Success', user });
+            const token = jwt.sign({ id: user._id }, process.env.JWT_secret, 
+                   { expiresIn: '30d' });
+            //set JWT as HTTP-only cookie
+            res.cookie('jwttoken', token, {
+                httpOnly: true,
+                sameSite: 'strict',
+                maxAge: 30 * 24 * 60 * 60 * 1000 //30 days
+            })
 
-            //create token
-            const token = jwt.sign({id: user._id}, process.env.JWT_secret, {expiresIn: '30d'})
-            res.cookie('token', token, {httpOnly: true})
-
+            res.status(200).json({ message: 'Login Success', user});
         }
     } catch (error) {
         console.log(error)

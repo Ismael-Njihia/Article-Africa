@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 import connectDB from './config/db.js';
 import CategoryRoutes from './Routes/CategoryRoutes.js';
 import ArticleRoutes from './Routes/ArticleRoutes.js';
@@ -7,10 +8,11 @@ import UserRoutes from './Routes/UserRoutes.js';
 
 const app = express();
 dotenv.config();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 5000;
 
 //use Json
 app.use(express.json());
+app.use(cookieParser());
 
 connectDB();
 
@@ -23,6 +25,7 @@ app.use('/api/categories', CategoryRoutes);
 app.use('/api/articles', ArticleRoutes);
 
 app.use('/api/users/login', UserRoutes);
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

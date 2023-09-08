@@ -1,3 +1,7 @@
+*{
+  margin: 0;
+  padding: 0;
+}
 .card-title {
     height: 50px;
   }
@@ -5,4 +9,38 @@
   .react-quill {
     height: calc(100% - 50px); 
     border: 1px solid #ccc; 
+  }
+
+  /*component Heaader*/
+
+  .top-links {
+    list-style-type: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 20px; 
+  }
+  
+  .top-links a {
+    text-decoration: none;
+    color: white; 
+    margin-left: 20px; 
+  }
+  
+  .top-links a:hover {
+    text-decoration: underline; 
+    color: #ffffff80; 
+  }
+  .Header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1a1a1a;
+    height: 50px;
+   padding: 10px;
+   width: 100%;
+  }
+  .header-wrapper{
+   
+    width: 100%;
   }

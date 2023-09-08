@@ -26,11 +26,9 @@ const Login = () => {
 
     axios.post('/api/users/login', loginData)
     .then((response) =>{
-        sessionStorage.setItem('token', response.data.token);
-       
         setEmail('');
         setPassword('');
-        navigate('/articles/edit')
+        navigate('/article/create')
 
     }).catch((error) => {
         alert(error.response.data.message)

@@ -3,7 +3,7 @@ import express from "express";
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/',async (req, res) => {
     try {
         const categories = await Category.find({})
         res.json(categories)

@@ -2,27 +2,39 @@ import React, { useState, useEffect } from 'react';
 import { Col, Row, Container, Form, Card, Button } from 'react-bootstrap';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-
 import axios from 'axios';
+
+import Header from '../components/Header';
 
 const EditArticlePage = () => {
   // State to manage form fields
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [body, setBody] = useState('');
-
+  
   //load the categories using axios
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const { data } = await axios.get('/api/categories');
-      //get categories name only
-      const categoryName = data.map((category) => category.name);  
-      setCategories(categoryName);
+      try {
+        const response = await axios.get('/api/categories');
+        const categoryName = response.data.map((category) => category.name);
+        setCategories(categoryName);
+      } catch (error) {
+        if (error.response) {
+          console.error('Request failed with status code:', error.response.status);
+          alert(`Request failed with status code: ${error.response.status}`);
+        } else {
+          console.error('Error:', error.message);
+          alert(`Error: ${error.message}`);
+        }
+      }
     };
+  
     fetchCategories();
   }, []);
+  
   
 
   // Handle form submission
@@ -50,6 +62,8 @@ const EditArticlePage = () => {
   };
 
   return (
+    <>
+    <Header/>
     <Container className="mt-5">
       <h3 style={{textAlign: 'center'}}>Publish an Article for Article Africa</h3>
       <Row className="justify-content-center">
@@ -110,6 +124,7 @@ const EditArticlePage = () => {
         </Col>
       </Row>
     </Container>
+    </>
   );
 };
 

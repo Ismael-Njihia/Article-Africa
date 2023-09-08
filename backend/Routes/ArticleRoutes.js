@@ -1,10 +1,11 @@
 import Article from "../models/ArticleModel.js";
 import Category from "../models/CategoryModel.js";
 import express from "express";
+import {  authenticateToken } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post('/', async (req, res) => {
+router.post('/',authenticateToken, async (req, res) => {
     try {
         const { title, category, body } = req.body;
         //The title must be unique
