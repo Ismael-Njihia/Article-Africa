@@ -14,7 +14,6 @@ const authenticateToken = async (req, res, next) => {
     } catch (error) {
         console.log(error)
         res.status(401).json({message: 'Token failed'})
-        
     }
 
    }else{

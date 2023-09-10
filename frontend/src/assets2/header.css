@@ -1,0 +1,53 @@
+.top{
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    z-index: 999;
+
+}
+.topLeft, .topRight{
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.topIcon{
+    font-size: 20px;
+    margin-right: 10px;
+    color: green;
+    cursor: pointer;
+}
+.topCenter{
+    flex: 6;
+}
+
+.topList{
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.topListItem{
+    margin-right: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #444;
+    cursor: pointer;
+}
+.topListItem:hover{
+    color: #666;
+}
+
+.topSearchIcon{
+    font-size: 16px;
+    margin-right: 10px;
+    color: green;
+    cursor: pointer;
+}
