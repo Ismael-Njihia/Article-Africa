@@ -1,5 +1,5 @@
 import '../assets2/header.css'
-import {FaFacebookSquare, FaInstagramSquare, FaLinkedin, FaTwitterSquare} from 'react-icons/fa'
+import {FaFacebookSquare, FaInstagramSquare, FaLinkedin, FaTwitterSquare, FaBars} from 'react-icons/fa'
 
 const Header = () => {
   return (
@@ -23,6 +23,9 @@ const Header = () => {
                 <FaLinkedin className='topIcon' />
                 <FaTwitterSquare className='topIcon' />
                
+        </div>
+        <div className='topFarRight'>
+            <FaBars className='topIcon' />
         </div>
      </div>
     </>

@@ -1,3 +1,6 @@
+*{
+    box-sizing: border-box;
+}
 .top{
     width: 100%;
     height: 50px;
@@ -9,6 +12,13 @@
     z-index: 999;
 
 }
+.topLeft li{
+    margin-right: 10px;
+    list-style-type: none;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 10px;
+  }
 .topLeft, .topRight{
     flex: 3;
     display: flex;
@@ -51,3 +61,33 @@
     color: green;
     cursor: pointer;
 }
+
+
+@media screen and (max-width: 768px) {
+  .topRight,
+  .topCenter{
+    display: none;
+  }
+  .top{
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+    height: 7vh;
+    box-sizing: border-box;
+    overflow: hidden;
+    
+  }
+  .topLeft{
+    justify-content: flex-start;
+    width: auto;
+  }
+  .topLeft li{
+    margin-right: 10px;
+    list-style-type: none;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+  
+}
+  

@@ -16,10 +16,10 @@ const App = () => {
   return (
     <>
     <Header />
-    <div style={{ display: 'flex', flexDirection: 'row' }}>
-      <div style={{ width: '80%' }}>
+    <div className='appContainer' >
+      <div className='leftDiv'>
         
-        <Row xs={2} md={4} lg={4}>
+        <Row xs={2} md={3} lg={4}>
           {data &&
             data.map((article) => {
               const text = htmlToText(article.body, {
@@ -28,12 +28,12 @@ const App = () => {
                 ignoreImage: true,
               });
               
-              const shortText = text.length > 25 ? text.substring(0,25) + '...' : text; 
+              const shortText = text.length > 25 ? text.substring(0,45) + '...' : text; 
               return(
                 <Col key={article._id}>
-                  <div className="article-container">
+                  <div className="article-container" style={{marginBottom: '20px', marginRight:'10px'}}>
                     <Link to={`/article/${article._id}`}>
-                      <h3>{article.title}</h3>
+                      <h4>{article.title}</h4>
                     </Link>
                     <div>{shortText}</div>
                   </div>
@@ -43,7 +43,7 @@ const App = () => {
           }
         </Row>
       </div>
-      <div style={{ width: '20%', border: '1px solid black' }}>
+      <div className='rightDiv'>
         {/* Add content for the 20% width div here */}
       </div>
     </div>
