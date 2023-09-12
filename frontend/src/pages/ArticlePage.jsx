@@ -6,8 +6,13 @@ import { Row, Col } from "react-bootstrap";
 const ArticlePage = () => {
     const { id: articleId } = useParams()
     const { data, isLoading, error } = useGetArticleQuery(articleId)
+
+    if (error) return <div>{error}</div>
   return (
     <>
+    {
+        isLoading && <div>Loading....</div>
+    }
     <Row>
         <h1>{data?.title}</h1>
     </Row>

@@ -15,18 +15,25 @@ import EditArticlePage from './pages/EditArticlePage';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import ArticlePage from './pages/ArticlePage';
+import PrivateRoute from './components/PrivateRoute';
+import Homepage from './pages/Homepage';
 
 
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
-    <>
-    <Route path="/" element={<App />} />
+    
+    <Route path="/" element={<App />} >
+    <Route index={true} path='/' element={<Homepage />} />
     <Route path="/login" element={<Login />} />
+    <Route path="/article/:id" element={<ArticlePage />} />
+    
+    <Route path='/' element={<PrivateRoute />} />
     <Route path="/article/create" element={<EditArticlePage />} />
     <Route path="/signup" element={<SignUp />} />
-    <Route path="/article/:id" element={<ArticlePage />} />
-    </>
+
+    </Route>
+    
   )
 );
 

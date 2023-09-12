@@ -6,11 +6,14 @@ import axios from 'axios';
 
 import Header from '../components/Header';
 
+
 const EditArticlePage = () => {
   // State to manage form fields
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [body, setBody] = useState('');
+
+  
   
   //load the categories using axios
   const [categories, setCategories] = useState([]);

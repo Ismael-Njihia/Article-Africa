@@ -1,38 +1,52 @@
-import React, { useState } from 'react';
+ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Card, Button } from 'react-bootstrap';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLoginMutation } from '../slices/usersApiSlice';
+import { setCredentials } from '../slices/authSlice';
+import {toast} from 'react-toastify'
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [login, { isLoading }] = useLoginMutation();
+  const {userInfo} = useSelector((state) => state.auth);
+
+  const {search} = useLocation();
+  const sp = new URLSearchParams(search);
+  const redirect = sp.get('redirect') || '/article/create';
+
+  useEffect(()=>{
+    if(userInfo){
+      navigate(redirect)
+    }
+
+  }, [userInfo, redirect, navigate])
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
-  };
+  }; 
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    const loginData = {
-      email,
-      password,
-    };
+   try {
+    const res = await login({email, password}).unwrap();
+    dispatch(setCredentials({...res,}))
+    navigate(redirect)
+    
+   } catch (error) {
+      toast.error(error?.data?.message || error?.data?.error)
+    
+   }
 
-    axios.post('/api/users/login', loginData)
-    .then((response) =>{
-        setEmail('');
-        setPassword('');
-        navigate('/article/create')
-
-    }).catch((error) => {
-        alert(error.response.data.message)
-    })
     
   };
 
@@ -70,9 +84,12 @@ const Login = () => {
                 </Form.Group>
 
                 <br />
-                <Button variant="primary" type="submit" block>
+                <Button variant="primary" type="submit" disabled={isLoading} block>
                   Login
                 </Button>
+                {
+                  isLoading && <div>Loading...</div>
+                }
               </Form>
             </Card.Body>
           </Card>

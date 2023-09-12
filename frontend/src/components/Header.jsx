@@ -3,6 +3,8 @@ import { Navbar, Nav, Offcanvas } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../assets/style.css';
 
+
+
 const Header = () => {
   const [show, setShow] = useState(false);
 
@@ -18,6 +20,7 @@ const Header = () => {
           <Nav className='top-links'>
             <Link to="/article/create">Create Article</Link>
             <Link to="/signup">Signup</Link>
+            <Link to="/login">Login</Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

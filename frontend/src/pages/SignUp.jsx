@@ -2,27 +2,28 @@ import React, { useState } from 'react';
 import { Row, Col, Form, Card, Button } from 'react-bootstrap';
 import Header from '../components/Header';
 
-const SignUp = () => {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+const SignUp = () => {
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleFullName = (e) => {
+    setFullName(e.target.value);
+  }
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  }
+
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission here (e.g., send data to a server)
-    console.log(formData);
+   
   };
 
   return (
@@ -34,31 +35,20 @@ const SignUp = () => {
             <Card.Body>
               <Card.Title className="text-center">Sign up A New writer</Card.Title>
               <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="firstName">
-                  <Form.Label>First Name</Form.Label>
+                <Form.Group controlId="fullName">
+                  <Form.Label>Full Name</Form.Label>
                   <Form.Control
                     type="text"
-                    name="firstName"
-                    placeholder="Enter your first name"
-                    value={formData.firstName}
-                    onChange={handleChange}
+                    name="fullName"
+                    placeholder="Enter your Full name"
+                    value={fullName}
+                    onChange={handleFullName}
                     required
                   />
                 </Form.Group>
                 <br/>
 
-                <Form.Group controlId="lastName">
-                  <Form.Label>Last Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="lastName"
-                    placeholder="Enter your last name"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    required
-                  />
-                </Form.Group>
-                <br/>
+              
 
                 <Form.Group controlId="email">
                   <Form.Label>Email</Form.Label>
@@ -66,8 +56,20 @@ const SignUp = () => {
                     type="email"
                     name="email"
                     placeholder="Enter your email"
-                    value={formData.email}
-                    onChange={handleChange}
+                    value={email}
+                    onChange={handleEmail}
+                    required
+                  />
+                </Form.Group>
+                <br/>
+                <Form.Group controlId="Password">
+                  <Form.Label> Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    name="Password"
+                    placeholder="Enter your Password"
+                    value={password}
+                    onChange={handlePassword}
                     required
                   />
                 </Form.Group>
