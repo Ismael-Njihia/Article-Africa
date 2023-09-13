@@ -1,12 +1,49 @@
 import '../assets2/header.css'
 import {FaFacebookSquare, FaInstagramSquare, FaLinkedin, FaTwitterSquare, FaBars} from 'react-icons/fa'
+import {useSelector, useDispatch} from 'react-redux'
+import {useLogoutMutation } from '../slices/usersApiSlice'
+import { logout } from '../slices/authSlice'
+import { useNavigate } from 'react-router-dom'
+
+import { NavDropdown } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 
 const Header = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const {userInfo } = useSelector((state) => state.auth)
+  console.log(userInfo)
+  const [logoutMutation] = useLogoutMutation()
+
+  const logoutHandler = async () => {
+    try{
+      await logoutMutation()
+      dispatch(logout())
+      navigate('/login')
+
+    }catch(error){
+      console.log(error)
+    }
+  }
   return (
     <>
      <div className='top'>
          <div className='topLeft'>
-         <li className='topListItem'>Article Africa!</li>
+         {
+      userInfo? (
+        <NavDropdown className='topListItem'> 
+          <NavDropdown.Item>Hi {userInfo.name}</NavDropdown.Item>
+          <LinkContainer to='/profile'>
+            <NavDropdown.Item>Profile</NavDropdown.Item>
+          </LinkContainer>
+          <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+          </NavDropdown>
+      ):(
+        <li className='topListItem'>Article Africa!</li>
+      )
+    }
+        
            
          </div>
          <div className='topCenter'>

@@ -1,13 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Form, Card, Button } from 'react-bootstrap';
 import Header from '../components/Header';
-
+import {useSelector, useDispatch} from 'react-redux';
+import {useRegisterMutation } from '../slices/usersApiSlice';
+import {setCredentials} from '../slices/authSlice'
+import {toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
+  const [register, {isLoading}] = useRegisterMutation()
+
+  const {userInfo} = useSelector((state)=> state.auth)
+
+  useEffect(()=>{
+    if(userInfo){
+      navigate('/login')
+    }
+  }, [userInfo, navigate])
   const handleFullName = (e) => {
     setFullName(e.target.value);
   }
@@ -20,14 +35,24 @@ const SignUp = () => {
     setPassword(e.target.value);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // Handle form submission here (e.g., send data to a server)
-   
+    try {
+      const res = await register({fullName, email, password}).unwrap();
+      dispatch(setCredentials({...res}))
+      navigate('/login')
+      
+    } catch (error) {
+      toast.error(error?.data?.message || error.error)
+
+    }
   };
 
   return (
    <>
+   {
+    isLoading && <div>Loading.... </div>
+   }
       <Header />
       <Row className="justify-content-center mt-5">
         <Col md={6}>

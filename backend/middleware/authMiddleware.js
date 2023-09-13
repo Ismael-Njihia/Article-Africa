@@ -5,7 +5,7 @@ const authenticateToken = async (req, res, next) => {
     let token;
 
     //read the Jwttoken from the cookie
-   token = req.cookies.jwttoken
+   token = req.cookies.jwt
    if(token){
     try {
         const decoded = jwt.verify(token, process.env.JWT_secret)
@@ -13,17 +13,19 @@ const authenticateToken = async (req, res, next) => {
         next()
     } catch (error) {
         console.log(error)
-        res.status(401).json({message: 'Token failed'})
+        res.status(401)
+        throw new Error('Not Authorized, token failed')
     }
 
    }else{
-    res.status(401).json({message: 'Not Authorized'})
+    res.status(401)
+    throw new Error('Not Authorized, no token')
    }
 }
 
 //Admin middleware
 const admin = (req, res, next) => {
-    if (req.user && req.user.isAdmin) {
+    if (req.user && req.user.userType === 'admin') {
         next();
     } else {
         res.status(401).json({ message: 'Not authorized as an admin' });

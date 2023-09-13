@@ -1,6 +1,6 @@
 import asyncHandler from "../middleware/asyncHandler.js";
 import User from "../models/UserModel.js";
-import jwt from 'jsonwebtoken';
+import generateToken from "../utils/generateToken.js";
 
 const registerUser = asyncHandler(async (req, res) => {
     const {name, email, password} = req.body;
@@ -13,6 +13,8 @@ const registerUser = asyncHandler(async (req, res) => {
     const user = await User.create({name, email, password});
 
     if(user){
+        generateToken(res, user._id);
+
         res.status(201).json({
             _id: user._id,
             name: user.name,
@@ -32,16 +34,13 @@ const login = asyncHandler(async (req, res) => {
     //check if email exists
     const user = await User.findOne({email});
     if (user && password == user.password){
-    const token = jwt.sign({ id: user._id }, process.env.JWT_secret, 
-            { expiresIn: '30d' });
-     //set JWT as HTTP-only cookie
-     res.cookie('jwttoken', token, {
-         httpOnly: true,
-         sameSite: 'strict',
-         maxAge: 30 * 24 * 60 * 60 * 1000 //30 days
-     })
-
-     res.status(200).json({ message: 'Login Success', user});
+    generateToken(res, user._id);
+    res.json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+    })
     }
     else{
         res.status(400);
@@ -50,10 +49,11 @@ const login = asyncHandler(async (req, res) => {
 })
 
 const logoutUser = asyncHandler(async (req, res) => {
-   res.cookie('token', null, {
-       expires: new Date(Date.now()),
+   res.cookie('jwt', '', {
+       expires: new Date(0),
        httpOnly: true
    })
+   res.status(200).json({message: 'logout success'});
 })
 
 const getAllUsers = asyncHandler(async (req, res) => {

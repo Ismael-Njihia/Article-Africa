@@ -17,20 +17,27 @@ import SignUp from './pages/SignUp';
 import ArticlePage from './pages/ArticlePage';
 import PrivateRoute from './components/PrivateRoute';
 import Homepage from './pages/Homepage';
+import AdminRoute from './components/AdminRoute';
+import UsersListPage from './pages/UsersListPage';
 
 
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
     
-    <Route path="/" element={<App />} >
-    <Route index={true} path='/' element={<Homepage />} />
-    <Route path="/login" element={<Login />} />
-    <Route path="/article/:id" element={<ArticlePage />} />
-    
-    <Route path='/' element={<PrivateRoute />} />
-    <Route path="/article/create" element={<EditArticlePage />} />
-    <Route path="/signup" element={<SignUp />} />
+    <Route path="/" element={<App />}>
+      <Route index={true} path='/' element={<Homepage />} />
+      <Route path="/article/:id" element={<ArticlePage />} />
+      <Route path="/login" element={<Login />} />
+      
+    <Route path='/' element={<PrivateRoute />}>
+      <Route path="/article/create" element={<EditArticlePage />} />
+      <Route path="/signup" element={<SignUp />} />
+    </Route>
+
+      <Route path='/' element={<AdminRoute />}>
+      <Route path='/admin/userslist' element={<UsersListPage />} />
+    </Route>
 
     </Route>
     
