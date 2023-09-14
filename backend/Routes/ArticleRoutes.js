@@ -1,5 +1,4 @@
-import Article from "../models/ArticleModel.js";
-import Category from "../models/CategoryModel.js";
+
 import express from "express";
 import {createArticle,
     deleteArticleById,

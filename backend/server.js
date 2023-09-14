@@ -5,7 +5,7 @@ import connectDB from './config/db.js';
 import CategoryRoutes from './Routes/CategoryRoutes.js';
 import ArticleRoutes from './Routes/ArticleRoutes.js';
 import UserRoutes from './Routes/UserRoutes.js';
-import cors from 'cors';
+
 
 import { notFound, errorHandler } from './middleware/errormiddleware.js';
 
@@ -17,8 +17,6 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cookieParser());
 
-//use cors
-app.use(cors());
 
 connectDB();
 

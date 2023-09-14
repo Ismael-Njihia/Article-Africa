@@ -5,7 +5,7 @@ const generateToken = (res, userId) =>{
         expiresIn: '30d'
     })
 
-    //set jwt as httpOnly Cookie
+    
     res.cookie('jwt', token,{
         httpOnly: true,
         maxAge: 30 * 24 * 60 * 60 * 1000, //30 days

@@ -12,10 +12,10 @@ export const articlesApiSlice = apiSlice.injectEndpoints({
             providesTags: ['Articles']
         }),
         createArticle: builder.mutation({
-            query: (body) => ({
+            query: (data) => ({
                 url: ARTICLES_URL,
                 method: 'POST',
-                body
+                body:data
             }),
             invalidatesTags: ['Articles']
         }),

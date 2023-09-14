@@ -45,7 +45,8 @@ const deleteArticleById = asyncHandler(async(req,res)=>{
 
 const createArticle = asyncHandler(async(req, res)=>{
     try {
-        const { title, category, body } = req.body;
+        
+        const { title, category, body,} = req.body;
         //The title must be unique
         const titleLowercase = title.toLowerCase();
 
@@ -60,7 +61,7 @@ const createArticle = asyncHandler(async(req, res)=>{
             return res.status(400).json({ message: 'Category does not exist' });
         }
 
-        const article = new Article({ title, category: categoryExists._id, body, titleLowercase });
+        const article = new Article({ title, category: categoryExists._id, body, titleLowercase, postedBy: req.user._id });
         await article.save();
         res.status(201).json(article);
 

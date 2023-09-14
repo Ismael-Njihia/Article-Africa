@@ -5,6 +5,8 @@ import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
 
 import Header from '../components/Header';
+import {useCreateArticleMutation} from '../slices/ArticlesApiSlice'
+import {toast} from 'react-toastify'
 
 
 const EditArticlePage = () => {
@@ -12,6 +14,24 @@ const EditArticlePage = () => {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [body, setBody] = useState('');
+
+  const [createArticle, {isLoading: loadingCreate}] = useCreateArticleMutation()
+
+  const createProductHandler = async() =>{
+    if(window.confirm('Are you sure you want to publish this Article?')){
+      try{
+        const result = await createArticle({title, category, body})
+        console.log(result)
+        if(result.error){
+          toast.error(result.error)
+        }else{
+        toast.success('Article Published Successfully')
+        }
+      }catch(error){
+        toast.error(error.message)
+      }
+    }
+  }
 
   
   
@@ -38,34 +58,11 @@ const EditArticlePage = () => {
     fetchCategories();
   }, []);
   
-  
 
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const articleData = {
-      title,
-      category,
-      body,
-    }; 
-    // Post article to backend
-    axios
-      .post('/api/articles', articleData)
-      .then((response) => {
-        alert('Article published successfully');
-        setTitle('');
-        setCategory('');
-        setBody('');
-      })
-      .catch((error) => {
-        console.log(error);
-        alert(error.response.data.message)
-      });
-  };
 
   return (
     <>
+
     <Header/>
     <Container className="mt-5">
       <h3 style={{textAlign: 'center'}}>Publish an Article for Article Africa</h3>
@@ -74,7 +71,7 @@ const EditArticlePage = () => {
           <Card style={{height: '750px'}}>
             <Card.Body>
               
-              <Form onSubmit={handleSubmit}>
+              <Form>
                 <Form.Group controlId="title">
                   <Form.Label>Article Title</Form.Label>
                   <Form.Control
@@ -119,7 +116,7 @@ const EditArticlePage = () => {
               </Form>
               
             </Card.Body>
-            <Button variant="primary" className= "sm" onClick={handleSubmit} type="submit" block>
+            <Button variant="primary" className= "sm" onClick={createProductHandler} type="submit" block disabled={loadingCreate}>
                     Publish Article
                   </Button>
               
