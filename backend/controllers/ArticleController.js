@@ -3,12 +3,17 @@ import Article from "../models/ArticleModel.js";
 import Category from "../models/CategoryModel.js";
 
 const getArticles  = asyncHandler(async (req, res)=>{
-    const articles = await Article.find({});
+    const articles = await Article.find({})
+    .populate('category')
+    //only name and id of the user
+    .populate('postedBy', 'name id')
     res.json(articles);
 })
 
 const getArticlesById  = asyncHandler(async (req, res)=>{
-    const article = await Article.findById(req.params.id);
+    const article = await Article.findById(req.params.id)
+    .populate('category')
+    .populate('postedBy', 'name id')
     if (article) {
         return   res.json(article);
     } else {

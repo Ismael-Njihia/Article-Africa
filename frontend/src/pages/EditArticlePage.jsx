@@ -100,6 +100,17 @@ const EditArticlePage = () => {
                 </Form.Group>
 
                 <br />
+                <Form.Group controlId="title">
+                <Form.Label>If you have an Image inside the Article render it using HTML</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder='<img src="https://images.unsplash.com/photo-161" alt="Article Image" />'
+                  disabled
+                />
+              </Form.Group>
+               <br/>
+
+
 
                 <Form.Group controlId="body">
                   <Form.Label>Article Body</Form.Label>

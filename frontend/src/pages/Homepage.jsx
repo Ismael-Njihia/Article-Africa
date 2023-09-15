@@ -20,7 +20,14 @@ const Homepage = () => {
         <Row xs={2} md={3} lg={4}>
           {data &&
             data.map((article) => {
-              const text = htmlToText(article.body, {
+              //Parse the HTML content to find and replace image links
+              const parsedBody = article.body.replace(
+                /<img src="([^"]+)" alt="([^"]+)"(.*?)>/g,
+                (match, src, alt) =>`<img src=${src} alt=${alt} style="width:70%;height:auto;"/>`
+              )
+
+
+              const text = htmlToText(parsedBody, {
                 wordwrap: false,
                 ignoreHref: true,
                 ignoreImage: true,
@@ -31,7 +38,7 @@ const Homepage = () => {
                 <Col key={article._id}>
                   <div className="article-container" style={{marginBottom: '20px'}}>
                     <Link to={`/article/${article._id}`}>
-                      <h4>{article.title}</h4>
+                     {article.title.length > 25 ? <h4>{article.title.substring(0,26) + '...'}</h4>: <h4>{article.title}</h4>}
                     </Link>
                     <div>{shortText}</div>
                   </div>
