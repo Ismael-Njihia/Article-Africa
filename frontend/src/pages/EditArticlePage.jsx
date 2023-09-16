@@ -68,7 +68,7 @@ const EditArticlePage = () => {
       <h3 style={{textAlign: 'center'}}>Publish an Article for Article Africa</h3>
       <Row className="justify-content-center">
         <Col md={8}>
-          <Card style={{height: '750px'}}>
+          <Card style={{height: '850px'}}>
             <Card.Body>
               
               <Form>
