@@ -1,15 +1,16 @@
 import React from 'react'
-import { useGetArticlesQuery } from '../slices/ArticlesApiSlice'
+import { useGetArticlesQuery } from '../slices/ArticlesApiSlice';
+import { useGetCategoriesQuery } from '../slices/CategoryApiSlice';
 import { Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { htmlToText } from 'html-to-text';
 import '../App.css'
 
-/*Components*/
-
 
 const Homepage = () => {
     const { data, error, isLoading } = useGetArticlesQuery();
+    const {data: categories, error: articleError, isLoading: articleIsLoading} = useGetCategoriesQuery();
+    console.log(categories)
     console.log(data, error, isLoading)
     if (isLoading) return <div>Loading...</div>
   return (
@@ -49,7 +50,25 @@ const Homepage = () => {
         </Row>
       </div>
       <div className='rightDiv'>
-        {/* Add content for the 20% width div here */}
+        {articleIsLoading && <div>Loading...</div>}
+        <h4>Topics</h4>
+
+        <div className='categoriesDiv'>
+          {categories &&
+            categories.map((category) => {
+              return(
+                <div key={category._id}>
+                  <Link to={`/category/${category.name}`}>
+                    <h5>{category.name}</h5>
+                  </Link>
+                </div>
+              )
+
+            })
+          }
+        </div>
+        
+        
       </div>
     </div>
     </>

@@ -19,7 +19,7 @@ import PrivateRoute from './components/PrivateRoute';
 import Homepage from './pages/Homepage';
 import AdminRoute from './components/AdminRoute';
 import UsersListPage from './pages/UsersListPage';
-
+import CategoryPage from './pages/CategoryPage';
 
 
 const routes = createBrowserRouter(
@@ -28,6 +28,7 @@ const routes = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route index={true} path='/' element={<Homepage />} />
       <Route path="/article/:id" element={<ArticlePage />} />
+      <Route path="/category/:name" element={<CategoryPage />} />
       <Route path="/login" element={<Login />} />
       
     <Route path='/' element={<PrivateRoute />}>

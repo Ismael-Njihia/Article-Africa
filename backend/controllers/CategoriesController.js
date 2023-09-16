@@ -7,17 +7,30 @@ const getCategories = asyncHandler(async (req, res) => {
 })
 
 const addCategory = asyncHandler(async (req, res) => {
-    const {category}  = req.body;
-    //check if category exists
-    const categoryExists = await Category.findOne({category});
-    if(categoryExists){
-        res.status(400)
+    try {
+      const { name } = req.body;
+  
+      console.log('Category received:', name);
+  
+      // Check if category exists
+      const categoryExists = await Category.findOne({ name });
+  
+      console.log('Category exists in database:', categoryExists);
+  
+      if (categoryExists) {
+        res.status(400);
         throw new Error('Category already exists');
+      }
+  
+      // Save the category
+      const newCategory = await Category.create({ name });
+      res.json(newCategory);
+    } catch (error) {
+      // Handle errors here
+      res.status(500).json({ error: error.message });
     }
-   //save the category
-    const newCategory = await Category.create({category});
-    res.json(newCategory);
-});
+  });
+  
 
 const getCategoryById = asyncHandler(async (req, res) => {
     const category = await Category.findById(req.params.id);
@@ -40,4 +53,22 @@ const deleteCategoryById = asyncHandler(async (req, res) => {
         throw new Error("Category Not found")
     }
 })
-export  {getCategories, addCategory, getCategoryById, deleteCategoryById}
+const getCategoryByName = asyncHandler(async (req, res) => {
+    try {
+        const category = await Category.findOne({ name: req.params.name })
+        .populate('');
+        if (category) {
+            return res.json(category);
+        } else {
+            res.status(404);
+            throw new Error('Category not found');
+        }
+    } catch (error) {
+        console.error(error); // Add this line to log the error
+        res.status(500).json({ message: 'Server Error' });
+    }
+});
+
+
+
+export  {getCategories, addCategory, getCategoryById, deleteCategoryById, getCategoryByName}
