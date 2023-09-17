@@ -40,5 +40,14 @@ articleSchema.post('save', async function(){
     }
 })
 
+//Define a post to 'save' hook to update the articles array in the corresponding User
+articleSchema.post('save', async function(){
+    try {
+        await User.findByIdAndUpdate(this.postedBy, {$addToSet: {articles: this._id}})
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 const Article = mongoose.model('Article', articleSchema)
 export default Article

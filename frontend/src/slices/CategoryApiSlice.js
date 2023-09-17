@@ -8,7 +8,7 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
             providesTags: ['Categories']
         }),
         getCategory: builder.query({
-            query: (id) => `${CATEGORIES_URL}/${id}`,
+            query: (name) => `${CATEGORIES_URL}/${name}`,
             providesTags: ['Categories']
         }),
         createCategory: builder.mutation({

@@ -23,7 +23,13 @@ const UserModel = mongoose.Schema({
         type: String,
         required: true,
         default: 'writer'
-    }
+    },
+    articles:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Article'
+        }
+    ]
      
 }, {timestamps: true})
 
