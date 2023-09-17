@@ -34,7 +34,20 @@ export const articlesApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['Articles']
         }),
+        //get many articles by Id so receiveing array of ids
+        getManyArticles: builder.mutation({
+            query: (ids) => ({
+                url: `${ARTICLES_URL}/many`,
+                method: 'POST',
+                body: {ids}
+            })
+        }),
     }),
 })
 
-export const {useGetArticlesQuery, useGetArticleQuery, useCreateArticleMutation, useUpdateArticleMutation, useDeleteArticleMutation} = articlesApiSlice;
+export const {useGetArticlesQuery,
+     useGetArticleQuery, 
+     useCreateArticleMutation, 
+     useUpdateArticleMutation,
+        useGetManyArticlesMutation,
+      useDeleteArticleMutation} = articlesApiSlice;

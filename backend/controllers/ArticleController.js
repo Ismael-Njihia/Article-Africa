@@ -22,6 +22,24 @@ const getArticlesById  = asyncHandler(async (req, res)=>{
     }
 })
 
+const getManyArticlesById = asyncHandler(async (req, res) => {
+    try {
+        const articles = await Article.find({ _id: { $in: req.body.ids } })
+            .populate('category')
+            .populate('postedBy', 'name id');
+        
+        if (articles && articles.length > 0) {
+            return res.json(articles);
+        } else {
+            res.status(404);
+            throw new Error('Articles not found');
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
 const editArticleById = asyncHandler(async(req, res)=>{
     const { title, category, body } = req.body;
     const article = await Article.findById(req.params.id);
@@ -82,5 +100,6 @@ export {
     deleteArticleById,
     editArticleById,
     getArticles,
-    getArticlesById
+    getArticlesById,
+    getManyArticlesById
 }
