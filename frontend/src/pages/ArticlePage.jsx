@@ -2,12 +2,15 @@ import { useGetArticleQuery } from "../slices/ArticlesApiSlice";
 import { useParams } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import he from "he";
-import '../assets2/articlePage.css'
+import '../assets2/articlePage.css';
+import {useSelector} from 'react-redux'
 
 const ArticlePage = () => {
   const { id: articleId } = useParams();
   const { data, isLoading, error } = useGetArticleQuery(articleId);
-  console.log(data);
+  const {userInfo} = useSelector(state => state.auth)
+  console.log(userInfo)
+
 
   const formatCreatedAt = (createdAt) =>{
     const options ={
@@ -45,6 +48,16 @@ const ArticlePage = () => {
               <p>Category: {category.name}</p>
               <p>Posted By: {postedBy.name}</p>
              <p>On: {formattedCreatedAt}</p>
+            </div>
+
+            <div className="DeleteandEdit">
+              {userInfo && (userInfo._id === postedBy._id || userInfo.isAdmin) && (
+                <div className="ButtonsOp">
+                  <button className="btn btn-light">Delete</button>
+                  <button className="btn btn-light">Edit</button>
+                </div>
+              )
+              }
             </div>
           </Col>
         </Row>
