@@ -55,16 +55,17 @@ const editArticleById = asyncHandler(async(req, res)=>{
     }
 })
 
-const deleteArticleById = asyncHandler(async(req,res)=>{
+const deleteArticleById = asyncHandler(async (req, res) => {
     const article = await Article.findById(req.params.id);
     if (article) {
-        await article.remove();
+        await Article.deleteOne({ _id: req.params.id }); // Use deleteOne to delete the article
         res.json({ message: 'Article removed' });
     } else {
-        res.status(404)
-        throw new Error ("Article Not found")
+        res.status(404);
+        throw new Error("Article not found");
     }
-})
+});
+
 
 const createArticle = asyncHandler(async(req, res)=>{
     try {

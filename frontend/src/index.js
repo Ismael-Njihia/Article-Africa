@@ -20,6 +20,8 @@ import Homepage from './pages/Homepage';
 import AdminRoute from './components/AdminRoute';
 import UsersListPage from './pages/UsersListPage';
 import CategoryPage from './pages/CategoryPage';
+import CreateArticlePage from './pages/CreateArticlePage';
+
 
 
 const routes = createBrowserRouter(
@@ -32,7 +34,8 @@ const routes = createBrowserRouter(
       <Route path="/login" element={<Login />} />
       
     <Route path='/' element={<PrivateRoute />}>
-      <Route path="/article/create" element={<EditArticlePage />} />
+      <Route path="/article/create" element={<CreateArticlePage />} />
+      <Route path="/article/edit/:id" element={<EditArticlePage />} />
       <Route path="/signup" element={<SignUp />} />
     </Route>
 

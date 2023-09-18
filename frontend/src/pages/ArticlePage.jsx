@@ -1,16 +1,43 @@
 import { useGetArticleQuery } from "../slices/ArticlesApiSlice";
-import { useParams } from "react-router-dom";
+import { useDeleteArticleMutation } from "../slices/ArticlesApiSlice";
+
+import { useParams, useNavigate } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import he from "he";
 import '../assets2/articlePage.css';
 import {useSelector} from 'react-redux'
+import { toast } from "react-toastify";
 
 const ArticlePage = () => {
   const { id: articleId } = useParams();
   const { data, isLoading, error } = useGetArticleQuery(articleId);
+  console.log(isLoading)
   const {userInfo} = useSelector(state => state.auth)
-  console.log(userInfo)
+  const navigate = useNavigate()
 
+ const  deleteBtnHandler = () => {
+    if (window.confirm("Are you sure you want to delete this article?")) {
+      deleteArticle(articleId);
+      //check if the article is deleted
+    }
+  }
+
+  const EditBtnHandler = () => {
+    navigate(`/article/edit/${articleId}`)
+  }
+
+  
+
+  const [deleteArticle,{data: deleteResponse, error: deletingError, isLoading: deleteLoading}] = useDeleteArticleMutation();
+
+  if(deleteResponse){
+    toast.success('Article deleted successfully')
+    navigate('/')
+  }
+  if(deletingError){
+    toast.error(deletingError)
+  }
+  if (deleteLoading) return <div>Deleting...</div>
 
   const formatCreatedAt = (createdAt) =>{
     const options ={
@@ -53,8 +80,17 @@ const ArticlePage = () => {
             <div className="DeleteandEdit">
               {userInfo && (userInfo._id === postedBy._id || userInfo.isAdmin) && (
                 <div className="ButtonsOp">
-                  <button className="btn btn-light">Delete</button>
-                  <button className="btn btn-light">Edit</button>
+                  <button 
+                  className="btn btn-light"
+                  onClick={deleteBtnHandler}
+                  >
+                    Delete</button>
+
+                  <button 
+                  className="btn btn-light"
+                  onClick={EditBtnHandler}
+                  >
+                    Edit</button>
                 </div>
               )
               }

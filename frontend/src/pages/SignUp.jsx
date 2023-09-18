@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Form, Card, Button } from 'react-bootstrap';
-import Header from '../components/Header';
 import {useSelector, useDispatch} from 'react-redux';
 import {useRegisterMutation } from '../slices/usersApiSlice';
 import {setCredentials} from '../slices/authSlice'
@@ -53,7 +52,7 @@ const SignUp = () => {
    {
     isLoading && <div>Loading.... </div>
    }
-      <Header />
+    
       <Row className="justify-content-center mt-5">
         <Col md={6}>
           <Card>

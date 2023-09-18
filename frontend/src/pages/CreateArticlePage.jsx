@@ -1,42 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { Col, Row, Container, Form, Card, Button } from 'react-bootstrap';
-
-import { useParams, useNavigate } from "react-router-dom"
-import { useUpdateArticleMutation } from "../slices/ArticlesApiSlice";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
-import { toast } from 'react-toastify';
 
-const EditArticlePage = () => {
-    const {id} = useParams()
-    const [title, setTitle] = useState('');
-    const [category, setCategory] = useState('');
-    const [body, setBody] = useState('');
-    const navigate = useNavigate()
 
-    const [updateArticle, {isLoading: loadingCreate, error: updatingError}] = useUpdateArticleMutation()
-    
-    const updateArticlehandler = async()=>{
-        if (window.confirm("Are you sure you want to update this article?")) {
-            try{
-                const result = await updateArticle({id, title, category, body})
-                if(result.error){
-                    toast.error(result.error)
-                }else{
-                    toast.success('Article Updated Successfully')
-                    navigate(`/article/${id}`)  
-                }
-            }catch(error){
-                toast.error(error.message)
-            }
+import {useCreateArticleMutation} from '../slices/ArticlesApiSlice'
+import {toast} from 'react-toastify'
+
+
+const CreateArticlePage = () => {
+  // State to manage form fields
+  const [title, setTitle] = useState('');
+  const [category, setCategory] = useState('');
+  const [body, setBody] = useState('');
+
+  const [createArticle, {isLoading: loadingCreate}] = useCreateArticleMutation()
+
+  const createProductHandler = async() =>{
+    if(window.confirm('Are you sure you want to publish this Article?')){
+      try{
+        const result = await createArticle({title, category, body})
+        console.log(result)
+        if(result.error){
+          toast.error(result.error)
+        }else{
+        toast.success('Article Published Successfully')
         }
+      }catch(error){
+        toast.error(error.message)
+      }
+    }
+  }
 
-    } 
-    
-
-
-      //load the categories using axios
+  
+  
+  //load the categories using axios
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -58,8 +57,12 @@ const EditArticlePage = () => {
   
     fetchCategories();
   }, []);
+  
+
+
   return (
     <>
+
     <Container className="mt-5">
       <h3 style={{textAlign: 'center'}}>Publish an Article for Article Africa</h3>
       <Row className="justify-content-center">
@@ -123,8 +126,8 @@ const EditArticlePage = () => {
               </Form>
               
             </Card.Body>
-            <Button variant="primary" className= "sm" onClick={updateArticlehandler} type="submit" block disabled={loadingCreate}>
-                    Save Changes
+            <Button variant="primary" className= "sm" onClick={createProductHandler} type="submit" block disabled={loadingCreate}>
+                    Publish Article
                   </Button>
               
             
@@ -133,7 +136,7 @@ const EditArticlePage = () => {
       </Row>
     </Container>
     </>
-  )
-}
+  );
+};
 
-export default EditArticlePage
+export default CreateArticlePage;

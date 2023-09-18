@@ -23,7 +23,7 @@ export const articlesApiSlice = apiSlice.injectEndpoints({
             query: ({id, body}) => ({
                 url: `${ARTICLES_URL}/${id}`,
                 method: 'PUT',
-                body
+                body: body
             }),
             invalidatesTags: ['Articles']
         }),
