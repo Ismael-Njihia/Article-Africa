@@ -39,22 +39,39 @@ const getManyArticlesById = asyncHandler(async (req, res) => {
     }
 });
 
-
-const editArticleById = asyncHandler(async(req, res)=>{
-    const { title, category, body } = req.body;
-    const article = await Article.findById(req.params.id);
+const editArticleById = asyncHandler(async (req, res) => {
+    const { title, body, category } = req.body;
+    const article = await Article.findById(req.params.id)
+      .populate('postedBy', 'name id');
+  
     if (article) {
+      if (title !== undefined) {
         article.title = title;
-        article.category = category;
+      }
+  
+      if (body !== undefined) {
         article.body = body;
-        const updatedArticle = await article.save();
-        res.json(updatedArticle);
+      }
+  
+      if (category !== undefined) {
+        // Use the correct model for category and populate it
+        article.category = await Category.findById(category);
+      }
+  
+      const updatedArticle = await article.save();
+      
+      // Now populate the category field in the updatedArticle
+      await Article.populate(updatedArticle, { path: 'category' });
+      
+      res.json(updatedArticle);
     } else {
-        res.status(404)
-        throw new Error('Article not Found')
+      res.status(404);
+      throw new Error('Article not Found');
     }
-})
-
+  });
+  
+  
+  
 const deleteArticleById = asyncHandler(async (req, res) => {
     const article = await Article.findById(req.params.id);
     if (article) {

@@ -3,6 +3,7 @@ import { Col, Row, Container, Form, Card, Button } from 'react-bootstrap';
 
 import { useParams, useNavigate } from "react-router-dom"
 import { useUpdateArticleMutation } from "../slices/ArticlesApiSlice";
+import { useGetArticleQuery } from '../slices/ArticlesApiSlice';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
@@ -16,6 +17,17 @@ const EditArticlePage = () => {
     const navigate = useNavigate()
 
     const [updateArticle, {isLoading: loadingCreate, error: updatingError}] = useUpdateArticleMutation()
+    const {data: article, isLoading, error} = useGetArticleQuery(id)
+    console.log(article)
+    //pre fill with data
+
+    useEffect(()=>{
+        if(article){
+            setTitle(article.title || '')
+            setCategory(article.category.name || '')
+            setBody(article.body || '')
+        }
+    }, [article])
     
     const updateArticlehandler = async()=>{
         if (window.confirm("Are you sure you want to update this article?")) {
@@ -34,7 +46,6 @@ const EditArticlePage = () => {
 
     } 
     
-
 
       //load the categories using axios
   const [categories, setCategories] = useState([]);
@@ -60,6 +71,15 @@ const EditArticlePage = () => {
   }, []);
   return (
     <>
+    {
+      isLoading && <p>Loading...</p>
+    }
+    {
+      error && toast.error(error.message)
+    }
+    {
+      updatingError && toast.error(updatingError.message)
+    }
     <Container className="mt-5">
       <h3 style={{textAlign: 'center'}}>Publish an Article for Article Africa</h3>
       <Row className="justify-content-center">
