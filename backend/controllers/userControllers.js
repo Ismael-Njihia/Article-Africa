@@ -3,31 +3,55 @@ import User from "../models/UserModel.js";
 import generateToken from "../utils/generateToken.js";
 
 const registerUser = asyncHandler(async (req, res) => {
-    const {name, email, password} = req.body;
-    //check if email exists
-    const userExists = await User.findOne({email});
-    if(userExists){
-        res.status(400);
-        throw new Error('User already exists');
-    }
-    const user = await User.create({name, email, password});
+    const { name, email, password } = req.body;
 
-    if(user){
+    // Remove spaces from the name and convert to lowercase
+    const username = name.replace(/\s/g, '').toLowerCase();
+
+    // Check if the username exists
+    let usernameExists = await User.findOne({ username });
+
+    // Declare the user variable outside the if-else block
+    let user;
+
+    // If the username exists, add two random numbers to the username
+    if (usernameExists) {
+        const randomNumbers = Math.floor(Math.random() * 100); // Generate random numbers between 0 and 99
+        const uniqueUsername = `${username}${randomNumbers}`;
+
+        // Check if the newly generated username exists
+        usernameExists = await User.findOne({ username: uniqueUsername });
+
+        if (usernameExists) {
+            res.status(400);
+            throw new Error('Unable to generate a unique username');
+        }
+
+        // Use the unique username
+        user = await User.create({ name, email, password, username: uniqueUsername });
+    } else {
+        // Use the original username
+        user = await User.create({ name, email, password, username });
+    }
+
+    if (user) {
         generateToken(res, user._id);
 
         res.status(201).json({
             _id: user._id,
             name: user.name,
-            email: user.email, 
+            email: user.email,
             isAdmin: user.isAdmin,
             userType: user.userType,
-            
-        })
-    }else{
+            username: user.username, 
+        });
+    } else {
         res.status(400);
         throw new Error('Invalid user data');
     }
-})
+});
+
+
 
 const login = asyncHandler(async (req, res) => {
     const {email, password} = req.body;
@@ -89,4 +113,16 @@ const EditUserById = asyncHandler(async (req, res) => {
     }
 })
 
-export {registerUser, login, logoutUser, getAllUsers, getUserByEmailAddress, EditUserById}
+const getUserByUsername = asyncHandler(async (req, res) => {
+    const {username} = req.body;
+    const user = await User.findOne({username});
+    if(user){
+        res.json(user)
+    }else{
+        res.status(404);
+        throw new Error('User not found');
+    }
+
+})
+
+export {registerUser, login, logoutUser, getAllUsers, getUserByEmailAddress, EditUserById, getUserByUsername}

@@ -21,6 +21,7 @@ import AdminRoute from './components/AdminRoute';
 import UsersListPage from './pages/UsersListPage';
 import CategoryPage from './pages/CategoryPage';
 import CreateArticlePage from './pages/CreateArticlePage';
+import ProfilePage from './pages/ProfilePage';
 
 
 
@@ -31,6 +32,7 @@ const routes = createBrowserRouter(
       <Route index={true} path='/' element={<Homepage />} />
       <Route path="/article/:id" element={<ArticlePage />} />
       <Route path="/category/:name" element={<CategoryPage />} />
+      <Route path="/profile/:username" element={<ProfilePage />} />
       <Route path="/login" element={<Login />} />
       
     <Route path='/' element={<PrivateRoute />}>

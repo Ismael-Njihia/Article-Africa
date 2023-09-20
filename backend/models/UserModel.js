@@ -14,6 +14,12 @@ const UserModel = mongoose.Schema({
         type: String, 
         required: true
     },
+    username:{
+        type: String,
+        required: true,
+        unique: true
+
+    },
     isAdmin: {
         type: Boolean, 
         required: true,
