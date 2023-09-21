@@ -64,6 +64,7 @@ const login = asyncHandler(async (req, res) => {
         name: user.name,
         email: user.email,
         isAdmin: user.isAdmin,
+        username: user.username,
     })
     }
     else{
@@ -114,15 +115,15 @@ const EditUserById = asyncHandler(async (req, res) => {
 })
 
 const getUserByUsername = asyncHandler(async (req, res) => {
-    const {username} = req.body;
-    const user = await User.findOne({username});
-    if(user){
-        res.json(user)
-    }else{
+    const { username } = req.params; // Extract username from URL parameters
+    const user = await User.findOne({ username });
+    if (user) {
+        res.json(user);
+    } else {
         res.status(404);
         throw new Error('User not found');
     }
+});
 
-})
 
 export {registerUser, login, logoutUser, getAllUsers, getUserByEmailAddress, EditUserById, getUserByUsername}

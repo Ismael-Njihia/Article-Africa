@@ -35,11 +35,11 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['Users']
         }),
-        getUserByUsername: builder.mutation({
-            query: (data) => ({
-                url: `${USERS_URL}/username`,
-                method: 'POST',
-                body: data
+        //query to get user by username
+        getUserByUsername: builder.query({
+            query: (username) => ({
+                url: `${USERS_URL}/${username}`,
+                
             })
         }),
     }),
@@ -53,6 +53,7 @@ export const {
     useRegisterMutation,
     useGetUserDetailsByEmailMutation,
     useLogoutMutation,
-    useGetUserByUsernameMutation
+    useGetUserByUsernameQuery
+   
 } = usersApiSlice;
 

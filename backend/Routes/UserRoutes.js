@@ -10,7 +10,7 @@ router.route('/register').post(authenticateToken, registerUser);
 router.route('/login').post(login);
 router.route('/logout').post(logoutUser);
 router.route('/email').post(authenticateToken, admin, getUserByEmailAddress);
-router.route('/username').post(getUserByUsername);
+router.route('/:username').get(getUserByUsername);
 router.route('/:id').put(authenticateToken, admin,EditUserById);
 
 

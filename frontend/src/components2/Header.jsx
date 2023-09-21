@@ -13,14 +13,16 @@ const Header = () => {
   const navigate = useNavigate()
 
   const {userInfo } = useSelector((state) => state.auth)
-  console.log(userInfo)
+  if(userInfo){
+    let username = userInfo.username;
+  }
   const [logoutMutation] = useLogoutMutation()
 
   const logoutHandler = async () => {
     try{
       await logoutMutation()
       dispatch(logout())
-      navigate('/login')
+      navigate('/signup')
 
     }catch(error){
       console.log(error)
@@ -30,21 +32,39 @@ const Header = () => {
     <>
      <div className='top'>
          <div className='topLeft'>
-         {
-      userInfo? (
-        <NavDropdown className='topListItem'> 
-          <NavDropdown.Item>Hi {userInfo.name}</NavDropdown.Item>
-          <LinkContainer to='/profile'>
-            <NavDropdown.Item>Profile</NavDropdown.Item>
-          </LinkContainer>
-          <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
-          </NavDropdown>
-      ):(
-        <li className='topListItem'>Article Africa!</li>
-      )
-    }
+          {userInfo &&(
+           <span className='topListItem'> Hi {userInfo.name}</span> 
+          )}
+
+         
+         
+{userInfo ? (
+  <NavDropdown className='topListItem'> 
+    
+    <LinkContainer to={`/profile/${userInfo.username}`}>
+      <div>
+        <NavDropdown.Item>Profile</NavDropdown.Item>
+        <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+      </div>
+    </LinkContainer>
+  </NavDropdown>
+) : (
+  <li className='topListItem'>Article Africa!</li>
+)}
+       {userInfo && userInfo.isAdmin && (
+            <NavDropdown className='topListItem'>
+              <LinkContainer to='/admin/users'>
+
+                <NavDropdown.Item>Users</NavDropdown.Item>
+              </LinkContainer>
+              <LinkContainer to='/admin/articles'>
+                <NavDropdown.Item>Articles</NavDropdown.Item>     
+              </LinkContainer>
+            </NavDropdown>
+          )}
+    
         
-           
+          
          </div>
          <div className='topCenter'>
             <ul className='topList'>

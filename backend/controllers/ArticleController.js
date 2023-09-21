@@ -6,14 +6,14 @@ const getArticles  = asyncHandler(async (req, res)=>{
     const articles = await Article.find({})
     .populate('category')
     //only name and id of the user
-    .populate('postedBy', 'name id')
+    .populate('postedBy', 'name id username')
     res.json(articles);
 })
 
 const getArticlesById  = asyncHandler(async (req, res)=>{
     const article = await Article.findById(req.params.id)
     .populate('category')
-    .populate('postedBy', 'name id')
+    .populate('postedBy', 'name id username')
     if (article) {
         return   res.json(article);
     } else {
@@ -26,7 +26,7 @@ const getManyArticlesById = asyncHandler(async (req, res) => {
     try {
         const articles = await Article.find({ _id: { $in: req.body.ids } })
             .populate('category')
-            .populate('postedBy', 'name id');
+            .populate('postedBy', 'name id username');
         
         if (articles && articles.length > 0) {
             return res.json(articles);

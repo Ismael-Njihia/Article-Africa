@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 const ArticlePage = () => {
   const { id: articleId } = useParams();
   const { data, isLoading, error } = useGetArticleQuery(articleId);
-  console.log(isLoading)
+  
   const {userInfo} = useSelector(state => state.auth)
   const navigate = useNavigate()
 
@@ -73,7 +73,9 @@ const ArticlePage = () => {
             {/* Right div with 20% width */}
             <div className="detailDiv">
               <p>Category: {category.name}</p>
-              <p>Posted By: {postedBy.name}</p>
+             {/* Addd a link to the name using the username */}
+              <p>Posted By: <a href={`/profile/${postedBy.username}`}>{postedBy.name}</a></p>
+              
              <p>On: {formattedCreatedAt}</p>
             </div>
 
