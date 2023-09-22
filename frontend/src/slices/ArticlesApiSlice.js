@@ -1,4 +1,5 @@
 import { ARTICLES_URL } from "../constants";
+import { UPLOAD_URL } from "../constants";
 import { apiSlice } from "./apiSlice";
 
 export const articlesApiSlice = apiSlice.injectEndpoints({
@@ -42,6 +43,13 @@ export const articlesApiSlice = apiSlice.injectEndpoints({
                 body: {ids}
             })
         }),
+        uploadArticleImage: builder.mutation({
+            query: (data) => ({
+                url: `${UPLOAD_URL}`,
+                method: 'POST',
+                body: data
+            })
+        }),
     }),
 })
 
@@ -50,4 +58,5 @@ export const {useGetArticlesQuery,
      useCreateArticleMutation, 
      useUpdateArticleMutation,
         useGetManyArticlesMutation,
+        useUploadArticleImageMutation,
       useDeleteArticleMutation} = articlesApiSlice;

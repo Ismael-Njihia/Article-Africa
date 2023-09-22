@@ -5,7 +5,8 @@ import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
 
 
-import {useCreateArticleMutation} from '../slices/ArticlesApiSlice'
+
+import {useCreateArticleMutation, useUploadArticleImageMutation} from '../slices/ArticlesApiSlice'
 import {toast} from 'react-toastify'
 
 
@@ -14,8 +15,24 @@ const CreateArticlePage = () => {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [body, setBody] = useState('');
+  const [image, setImage] = useState('')
 
   const [createArticle, {isLoading: loadingCreate}] = useCreateArticleMutation()
+  const [uploadArticleImage, {isLoading: loadingUpload}] = useUploadArticleImageMutation()
+
+  const uploadFileHandler = async(e) =>{
+    const formData = new FormData();
+    formData.append('image', e.target.files[0])
+
+    try {
+      const res = await uploadArticleImage(formData).unwrap()
+      toast.success(res.message)
+      setImage(res.image)
+    } catch (error) {
+      toast.error(error.message)
+    }
+
+  }
 
   const createProductHandler = async() =>{
     if(window.confirm('Are you sure you want to publish this Article?')){
@@ -82,6 +99,35 @@ const CreateArticlePage = () => {
                   />
                 </Form.Group>
                 <br />
+                {/*Image Input Placeholder */}
+
+                <Form.Group controlId="image">
+                <Form.Label>Upload Article Image</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter image url"
+                  value={image}
+                  onChange={(e) => setImage(e.target.value)}
+                  required
+                  disabled
+                > 
+                </Form.Control>
+                <br/>
+                <Form.Control
+                  type="file"
+                  id="image-file"
+                  label="Choose File"
+                  custom
+                  onChange={uploadFileHandler}
+                >
+
+                </Form.Control>
+
+              </Form.Group>
+
+              <br />
+
+
 
                 <Form.Group controlId="category">
                   <Form.Label>Select Category</Form.Label>
