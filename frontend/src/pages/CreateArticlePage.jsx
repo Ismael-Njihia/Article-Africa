@@ -37,7 +37,7 @@ const CreateArticlePage = () => {
   const createProductHandler = async() =>{
     if(window.confirm('Are you sure you want to publish this Article?')){
       try{
-        const result = await createArticle({title, category, body})
+        const result = await createArticle({title, category, body, image})
         console.log(result)
         if(result.error){
           toast.error(result.error)
