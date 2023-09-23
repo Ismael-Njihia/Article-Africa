@@ -90,6 +90,16 @@ const createArticle = asyncHandler(async(req, res)=>{
         const { title, category, body, image} = req.body;
         //The title must be unique
         const titleLowercase = title.toLowerCase();
+        //make sure all fields are filled
+        if(!title){
+            return res.status(400).json({ message:'Title is required'});
+        }
+        if(!body){
+            return res.status(400).json({ message:'Article Body is required'});
+        }
+        if(!image){
+            return res.status(400).json({ message:'Image is required For thumbnail'});
+        }
 
         const existingArticle = await Article.findOne({ titleLowercase });
         if (existingArticle) {
@@ -104,8 +114,9 @@ const createArticle = asyncHandler(async(req, res)=>{
 
         const article = new Article({ title, category: categoryExists._id, body, titleLowercase,image, postedBy: req.user._id });
         await article.save();
-        res.status(201).json(article);
-
+        //respond only with article id and title
+        res.status(201).json({ _id: article._id, title: article.title });
+       
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Server Error' });

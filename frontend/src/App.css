@@ -57,4 +57,18 @@
   }
   
 }
+.articleTitleSmall p{
+  font-size: 12px;
+  @media screen and (max-width: 768px) {
+    font-size: 10px;
+  }
+}
+.shortArticleText{
+  font-size: 10px;
+  @media screen and (max-width: 768px) {
+    font-size: 8px;
+  }
+}
+
+
 

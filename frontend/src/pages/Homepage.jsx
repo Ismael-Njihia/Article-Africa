@@ -38,10 +38,14 @@ const Homepage = () => {
               return(
                 <Col key={article._id}>
                   <div className="article-container" style={{marginBottom: '20px'}}>
+                    {/*Render the Image coming from the backend */}
+                    <div className="article-image">
+                      <img src={article.image} alt={article.title} style={{width: '100%', height: 'auto'}}/>
+                    </div>
                     <Link to={`/article/${article._id}`}>
-                     {article.title.length > 25 ? <h4>{article.title.substring(0,26) + '...'}</h4>: <h4>{article.title}</h4>}
+                     {article.title.length > 25 ? <p className='articleTitleSmall'>{article.title.substring(0,26) + '...'}</p>: <p>{article.title}</p>}
                     </Link>
-                    <div>{shortText}</div>
+                    <div className='shortArticleText'>{shortText}</div>
                   </div>
                 </Col>
               )

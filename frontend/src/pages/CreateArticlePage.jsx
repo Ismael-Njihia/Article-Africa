@@ -3,9 +3,7 @@ import { Col, Row, Container, Form, Card, Button } from 'react-bootstrap';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
-
-
-
+import { useNavigate } from 'react-router-dom';
 import {useCreateArticleMutation, useUploadArticleImageMutation} from '../slices/ArticlesApiSlice'
 import {toast} from 'react-toastify'
 
@@ -16,6 +14,8 @@ const CreateArticlePage = () => {
   const [category, setCategory] = useState('');
   const [body, setBody] = useState('');
   const [image, setImage] = useState('')
+
+  const navigate = useNavigate()
 
   const [createArticle, {isLoading: loadingCreate}] = useCreateArticleMutation()
   const [uploadArticleImage, {isLoading: loadingUpload}] = useUploadArticleImageMutation()
@@ -39,11 +39,23 @@ const CreateArticlePage = () => {
       try{
         const result = await createArticle({title, category, body, image})
         console.log(result)
+       //check forarticle is created
         if(result.error){
-          toast.error(result.error)
+          toast.error(result.error.data.message)
+          return
         }else{
         toast.success('Article Published Successfully')
+        //reset the text areas
+        setTitle('')
+        setCategory('')
+        setBody('')
+        setImage('')
+
+        //navigate to response article Id
+        navigate(`/article/${result.data._id}`)
+        
         }
+        
       }catch(error){
         toast.error(error.message)
       }
@@ -84,7 +96,7 @@ const CreateArticlePage = () => {
       <h3 style={{textAlign: 'center'}}>Publish an Article for Article Africa</h3>
       <Row className="justify-content-center">
         <Col md={8}>
-          <Card style={{height: '850px'}}>
+          <Card style={{height: '950px'}}>
             <Card.Body>
               
               <Form>
@@ -160,7 +172,7 @@ const CreateArticlePage = () => {
                 <Form.Group controlId="body">
                   <Form.Label>Article Body</Form.Label>
                   <ReactQuill
-                   style={{height: '400px'}}
+                   style={{height: '380px'}}
                     value={body}
                     onChange={setBody}
                     theme="snow" // You can change the theme if needed
