@@ -34,16 +34,16 @@ const Homepage = () => {
                 ignoreImage: true,
               });
               
-              const shortText = text.length > 25 ? text.substring(0,45) + '...' : text; 
+              const shortText = text.length > 25 ? text.substring(0,55) + '...' : text; 
               return(
                 <Col key={article._id}>
-                  <div className="article-container" style={{marginBottom: '20px'}}>
+                  <div className="article-container" style={{marginBottom: '10px'}}>
                     {/*Render the Image coming from the backend */}
-                    <div className="article-image">
-                      <img src={article.image} alt={article.title} style={{width: '100%', height: 'auto'}}/>
+                    <div className="article-image" style={{height: "130px", overflow: "hidden"}}>
+                      <img src={article.image} alt={article.title} style={{width: '100%', height: '100%', objectFit: "cover", objectPosition: "top"}}/>
                     </div>
                     <Link to={`/article/${article._id}`}>
-                     {article.title.length > 25 ? <p className='articleTitleSmall'>{article.title.substring(0,26) + '...'}</p>: <p>{article.title}</p>}
+                     {article.title.length > 25 ? <p className='articleTitleSmall'>{article.title.substring(0,37) + '...'}</p>: <p>{article.title}</p>}
                     </Link>
                     <div className='shortArticleText'>{shortText}</div>
                   </div>

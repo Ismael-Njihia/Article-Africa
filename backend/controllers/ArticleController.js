@@ -87,7 +87,7 @@ const deleteArticleById = asyncHandler(async (req, res) => {
 const createArticle = asyncHandler(async(req, res)=>{
     try {
         
-        const { title, category, body, image} = req.body;
+        const { title, category, body, image,imageCaption} = req.body;
         //The title must be unique
         const titleLowercase = title.toLowerCase();
         //make sure all fields are filled
@@ -99,6 +99,9 @@ const createArticle = asyncHandler(async(req, res)=>{
         }
         if(!image){
             return res.status(400).json({ message:'Image is required For thumbnail'});
+        }
+        if(!imageCaption){
+            return res.status(400).json({ message:'Image Caption is required'});
         }
 
         const existingArticle = await Article.findOne({ titleLowercase });
@@ -112,7 +115,7 @@ const createArticle = asyncHandler(async(req, res)=>{
             return res.status(400).json({ message: 'Category does not exist' });
         }
 
-        const article = new Article({ title, category: categoryExists._id, body, titleLowercase,image, postedBy: req.user._id });
+        const article = new Article({ title, category: categoryExists._id, body, imageCaption,  titleLowercase,image, postedBy: req.user._id });
         await article.save();
         //respond only with article id and title
         res.status(201).json({ _id: article._id, title: article.title });

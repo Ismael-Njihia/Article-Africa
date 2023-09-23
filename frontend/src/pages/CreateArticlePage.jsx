@@ -14,6 +14,7 @@ const CreateArticlePage = () => {
   const [category, setCategory] = useState('');
   const [body, setBody] = useState('');
   const [image, setImage] = useState('')
+  const [imageCaption, setImageCaption] = useState('')
 
   const navigate = useNavigate()
 
@@ -37,7 +38,7 @@ const CreateArticlePage = () => {
   const createProductHandler = async() =>{
     if(window.confirm('Are you sure you want to publish this Article?')){
       try{
-        const result = await createArticle({title, category, body, image})
+        const result = await createArticle({title, category, body, image, imageCaption})
         console.log(result)
        //check forarticle is created
         if(result.error){
@@ -96,7 +97,7 @@ const CreateArticlePage = () => {
       <h3 style={{textAlign: 'center'}}>Publish an Article for Article Africa</h3>
       <Row className="justify-content-center">
         <Col md={8}>
-          <Card style={{height: '950px'}}>
+          <Card style={{height: '1050px'}}>
             <Card.Body>
               
               <Form>
@@ -134,13 +135,21 @@ const CreateArticlePage = () => {
                 >
 
                 </Form.Control>
-
               </Form.Group>
+              <br/>
+              <Form.Group controlId="imageCaption">
+                  <Form.Label>Image Caption</Form.Label>
+                  <Form.Control
 
+                    type="text"
+                    placeholder="Enter image caption"
+                    value={imageCaption}
+                    onChange={(e) => setImageCaption(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+              
               <br />
-
-
-
                 <Form.Group controlId="category">
                   <Form.Label>Select Category</Form.Label>
                   <Form.Control
@@ -172,7 +181,7 @@ const CreateArticlePage = () => {
                 <Form.Group controlId="body">
                   <Form.Label>Article Body</Form.Label>
                   <ReactQuill
-                   style={{height: '380px'}}
+                   style={{height: '400px'}}
                     value={body}
                     onChange={setBody}
                     theme="snow" // You can change the theme if needed

@@ -21,6 +21,11 @@ const articleSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    imageCaption:{
+        type: String,
+        required: true
+
+    },
     body: {
         type: String,
         required: true
