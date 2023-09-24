@@ -21,13 +21,14 @@ export const articlesApiSlice = apiSlice.injectEndpoints({
             invalidatesTags: ['Articles']
         }),
         updateArticle: builder.mutation({
-            query: ({id, body}) => ({
-                url: `${ARTICLES_URL}/${id}`,
-                method: 'PUT',
-                body: body
+            query: ({ id, title, category, body }) => ({
+              url: `${ARTICLES_URL}/${id}`,
+              method: 'PUT',
+              body: { title, category, body }, // Include all fields you want to update
             }),
-            invalidatesTags: ['Articles']
-        }),
+            invalidatesTags: ['Articles'],
+          }),
+          
         deleteArticle: builder.mutation({
             query: (id) => ({
                 url: `${ARTICLES_URL}/${id}`,

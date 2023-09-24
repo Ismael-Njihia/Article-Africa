@@ -65,8 +65,25 @@ const ArticlePage = () => {
         </Row>
         <Row>
           <Col md={8}>
+            {/**Check if the aricle has Image If Yes, displa */}
+            {data.image && (
+              <div className="ArticleDiv">
+              <div className="article-image tipsadjust"
+              style={{height: "300px", overflow: "hidden"}}
+              >
+                <img 
+                src={data.image} 
+                alt={data.title} 
+                style={{width: '100%', height: '100%', objectFit: "cover", objectPosition: '50% 27%'}}
+                />
+              </div>
+              <div className="article-caption">
+                <p className="captionParagraph">{data.imageCaption}</p>
+              </div>
+              </div>
+            )}
             {/* Left div with 80% width */}
-            <div className="ArticleDiv" dangerouslySetInnerHTML={{ __html: parsedBody }}></div>
+            <div className="ArticleDiv article-content" dangerouslySetInnerHTML={{ __html: parsedBody }}></div>
           </Col>
 
           <Col md={4}>

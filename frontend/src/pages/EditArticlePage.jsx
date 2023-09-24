@@ -29,22 +29,30 @@ const EditArticlePage = () => {
         }
     }, [article])
     
-    const updateArticlehandler = async()=>{
-        if (window.confirm("Are you sure you want to update this article?")) {
-            try{
-                const result = await updateArticle({id, title, category, body})
-                if(result.error){
-                    toast.error(result.error)
-                }else{
-                    toast.success('Article Updated Successfully')
-                    navigate(`/article/${id}`)  
-                }
-            }catch(error){
-                toast.error(error.message)
-            }
+    const updateArticlehandler = async () => {
+      if (window.confirm("Are you sure you want to update this article?")) {
+        try {
+          const updatedArticleData = {
+            id, 
+            title,
+            category, // Assuming category is the category ID
+            body,
+          };
+    
+          const result = await updateArticle(updatedArticleData);
+          console.log(result, 'result')
+    
+          if (result.error) {
+            toast.error(result.error.message);
+          } else {
+            toast.success('Article Updated Successfully');
+          }
+        } catch (error) {
+          toast.error(error.message);
         }
-
-    } 
+      }
+    }
+    
     
 
       //load the categories using axios

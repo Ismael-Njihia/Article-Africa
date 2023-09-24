@@ -87,5 +87,15 @@
     border-radius: 10px;
   }
 }
+.captionParagraph {
+  background-color: #8B4513; 
+  color: white; 
+  padding: 10px; 
+  border-radius:  0 0 10px 10px;
+}
+.tipsadjust img{
+  border-radius: 10px 10px 0 0;
+}
+
 
 

@@ -41,34 +41,42 @@ const getManyArticlesById = asyncHandler(async (req, res) => {
 
 const editArticleById = asyncHandler(async (req, res) => {
     const { title, body, category } = req.body;
-    const article = await Article.findById(req.params.id)
-      .populate('postedBy', 'name id');
+    const article = await Article.findById(req.params.id).populate('postedBy', 'name id');
   
     if (article) {
-      if (title !== undefined) {
-        article.title = title;
-      }
+      try {
+        if (title !== undefined) {
+          article.title = title;
+        }
   
-      if (body !== undefined) {
-        article.body = body;
-      }
+        if (body !== undefined) {
+          article.body = body;
+        }
   
-      if (category !== undefined) {
-        // Use the correct model for category and populate it
-        article.category = await Category.findById(category);
-      }
+        if (category !== undefined) {
+          const newCategory = await Category.findById(category);
+          if (!newCategory) {
+            res.status(404);
+            throw new Error('Category not found');
+          }
+          article.category = newCategory;
+        }
   
-      const updatedArticle = await article.save();
-      
-      // Now populate the category field in the updatedArticle
-      await Article.populate(updatedArticle, { path: 'category' });
-      
-      res.json(updatedArticle);
+        const updatedArticle = await article.save();
+  
+        // Now populate the category field in the updatedArticle
+        await Article.populate(updatedArticle, { path: 'category' });
+  
+        res.json(updatedArticle);
+      } catch (error) {
+        res.status(400).json({ error: error.message });
+      }
     } else {
       res.status(404);
-      throw new Error('Article not Found');
+      throw new Error('Article not found');
     }
   });
+  
   
   
   
