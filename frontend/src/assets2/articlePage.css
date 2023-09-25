@@ -82,3 +82,12 @@
     height: 100%;
    border-radius: 10px;
 }
+.HoverBrownLeftRight{
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #8B4513;
+
+}

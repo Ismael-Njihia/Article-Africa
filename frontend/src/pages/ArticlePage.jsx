@@ -106,11 +106,11 @@ const ArticlePage = () => {
           <Col md={4}>
             {/* Right div with 20% width */}
             <div className="detailDiv">
-              <p>Category: <Link to={`/category/${category.name}`}>{category.name}</Link></p>
+              <p className="HoverBrownLeftRight">Category: <div style={{textDecoration: 'underline', marginLeft: '4px'}}><Link to={`/category/${category.name}`}>{category.name}</Link></div></p>
              {/* Addd a link to the name using the username */}
-              <p>Posted By: <a href={`/profile/${postedBy.username}`}>{postedBy.name}</a></p>
+              <p className="HoverBrownLeftRight">Posted By: <div style={{textDecoration: 'underline', marginLeft: '4px'}}> <Link to={`/profile/${postedBy.username}`}>{postedBy.name}</Link> </div></p>
               
-             <p>On: {formattedCreatedAt}</p>
+             <p className="HoverBrownLeftRight">On: {formattedCreatedAt}</p>
             </div>
 
             <div className="DeleteandEdit">

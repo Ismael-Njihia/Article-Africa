@@ -54,5 +54,12 @@
     border-radius: 5px ;
 }
 .profileEditButton button:hover{
-    background-color: #A0522D;
+    background-color: #ccb1a4;
+}
+.myArticles{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    font-size: 14px;
+    text-align: center;
 }
