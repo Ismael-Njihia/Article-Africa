@@ -62,6 +62,7 @@ const getCategoryByName = asyncHandler(async (req, res) => {
         } else {
             res.status(404);
             throw new Error('Category not found');
+            console.log('Category not found')
         }
     } catch (error) {
         console.error(error); // Add this line to log the error

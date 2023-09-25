@@ -63,7 +63,7 @@ const Homepage = () => {
               return(
                 <div key={category._id}>
                   <Link to={`/category/${category.name}`}>
-                    <h5>{category.name}</h5>
+                    <h5 className='categoryLinks'>{category.name}</h5>
                   </Link>
                 </div>
               )

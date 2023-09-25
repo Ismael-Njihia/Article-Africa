@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 .article-container {
-    border: 1px solid black;
+   
     padding: 10px;
     margin: 20px;
     border-radius: 10px;
@@ -96,6 +96,28 @@
 .tipsadjust img{
   border-radius: 10px 10px 0 0;
 }
+.categoryInit{
+  background-color: #8B4513; 
+  color: white; 
+  padding: 5px; 
+  border-radius:  10px 10px 0 0;
+  font-size: 14px;
+}
+
+.categoryLinks{
+  color: white; 
+  padding: 5px; 
+  border-radius:  10px 10px 0 0;
+  font-size: 14px;
+}
+
+.categoryLinks:hover{
+  background-color: #8B4513; 
+  color: white; 
+  padding: 5px; 
+  border-radius:  10px 10px 0 0;
+}
+
 
 
 

@@ -58,6 +58,23 @@ const ArticlePage = () => {
     const parsedBody = he.decode(body);
     const formattedCreatedAt = formatCreatedAt(createdAt)
 
+   
+    //create a function to wrao <img> elements in a div conatiner
+   const wrapImageswithContainers = (html) => {
+    const div = document.createElement("div");
+    div.innerHTML = html;
+    const images = div.querySelectorAll("img");
+    images.forEach((image) => {
+      const container = document.createElement("div");
+      container.className = "image-container";
+      image.parentNode.insertBefore(container, image);
+      container.appendChild(image);
+    });
+    return div.innerHTML;
+  }
+
+  const modifiedHTML = wrapImageswithContainers(parsedBody);
+
     return (
       <>
         <Row className="articleTitle">
@@ -83,7 +100,7 @@ const ArticlePage = () => {
               </div>
             )}
             {/* Left div with 80% width */}
-            <div className="ArticleDiv article-content" dangerouslySetInnerHTML={{ __html: parsedBody }}></div>
+            <div className="ArticleDiv article-content" dangerouslySetInnerHTML={{ __html: modifiedHTML }}></div>
           </Col>
 
           <Col md={4}>
