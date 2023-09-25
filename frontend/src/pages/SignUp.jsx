@@ -7,7 +7,7 @@ import {toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
-  const [fullName, setFullName] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate()
@@ -23,7 +23,7 @@ const SignUp = () => {
     }
   }, [userInfo, navigate])
   const handleFullName = (e) => {
-    setFullName(e.target.value);
+    setName(e.target.value);
   }
 
   const handleEmail = (e) => {
@@ -37,11 +37,13 @@ const SignUp = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     try {
-      const res = await register({fullName, email, password}).unwrap();
+      const res = await register({name, email, password}).unwrap();
+      console.log(res)
       dispatch(setCredentials({...res}))
       navigate('/login')
       
     } catch (error) {
+      console.log(error)
       toast.error(error?.data?.message || error.error)
 
     }
@@ -65,7 +67,7 @@ const SignUp = () => {
                     type="text"
                     name="fullName"
                     placeholder="Enter your Full name"
-                    value={fullName}
+                    value={name}
                     onChange={handleFullName}
                     required
                   />

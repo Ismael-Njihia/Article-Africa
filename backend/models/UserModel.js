@@ -25,6 +25,16 @@ const UserModel = mongoose.Schema({
         required: true,
         default: false
     },
+    bio:{
+        type: String,
+        required: false,
+        default: 'A hardworking writer'
+    },
+    image:{
+        type: String,
+        required: false,
+        default: '/uploads/image-1695634563122.png'
+    },
     userType: {
         type: String,
         required: true,

@@ -35,11 +35,12 @@ const routes = createBrowserRouter(
       <Route path="/category/:name" element={<CategoryPage />} />
       <Route path="/profile/:username" element={<ProfilePage />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
       
     <Route path='/' element={<PrivateRoute />}>
       <Route path="/article/create" element={<CreateArticlePage />} />
       <Route path="/article/edit/:id" element={<EditArticlePage />} />
-      <Route path="/signup" element={<SignUp />} />
+      
     </Route>
 
       <Route path='/' element={<AdminRoute />}>

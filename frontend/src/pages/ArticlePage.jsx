@@ -1,7 +1,7 @@
 import { useGetArticleQuery } from "../slices/ArticlesApiSlice";
 import { useDeleteArticleMutation } from "../slices/ArticlesApiSlice";
 
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import he from "he";
 import '../assets2/articlePage.css';
@@ -106,7 +106,7 @@ const ArticlePage = () => {
           <Col md={4}>
             {/* Right div with 20% width */}
             <div className="detailDiv">
-              <p>Category: {category.name}</p>
+              <p>Category: <Link to={`/category/${category.name}`}>{category.name}</Link></p>
              {/* Addd a link to the name using the username */}
               <p>Posted By: <a href={`/profile/${postedBy.username}`}>{postedBy.name}</a></p>
               
