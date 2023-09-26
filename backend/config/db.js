@@ -1,6 +1,9 @@
 import mongoose from 'mongoose'
+import dotenv from 'dotenv';
+dotenv.config();
 
-let MONGO_URI = 'mongodb+srv://ishmaelnjihia:Njihia7507@cluster0.99olahm.mongodb.net/ArticleAfrica?retryWrites=true&w=majority'
+let MONGO_URI = process.env.MONGO_URI;
+console.log(MONGO_URI)
 const connectDB = async () => {
     try {
         const conn = await mongoose.connect(MONGO_URI, {
