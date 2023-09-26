@@ -90,4 +90,75 @@
   }
   
 }
+.profiledropdownHolder{
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.articleAfricaLogo{
+  font-size: 29px;
+  font-weight: bold;
+  color: green;
+  margin-left: 30px;
+  cursor: pointer;                              
+}
   
+.modal-75w{
+  max-width: 75%;
+  width: 75%;
+  right: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  top: 10%;
+  transform: translateY(-50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  z-index: 999;
+  background-color: var(--primary-color);
+
+}
+.modal-body{
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: var(--primary-color);
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+.modal-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  background-color: var(--primary-color);
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+.modal-footer-links{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: var(--primary-color);
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+/*Icon appear on 768px devices and smaller*/
+.topFarRight{
+  display: none;
+  @media screen and (max-width: 768px) {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+    margin-right: 10px;
+  }
+}
+
+

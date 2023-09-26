@@ -23,6 +23,8 @@ import UsersListPage from './pages/UsersListPage';
 import CategoryPage from './pages/CategoryPage';
 import CreateArticlePage from './pages/CreateArticlePage';
 import ProfilePage from './pages/ProfilePage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
 
 
 
@@ -36,6 +38,8 @@ const routes = createBrowserRouter(
       <Route path="/profile/:username" element={<ProfilePage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/contact" element={<ContactPage />} />
       
     <Route path='/' element={<PrivateRoute />}>
       <Route path="/article/create" element={<CreateArticlePage />} />

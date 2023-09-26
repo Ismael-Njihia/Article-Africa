@@ -2,20 +2,35 @@
   box-sizing: border-box;
 }
 .article-container {
-   
-    padding: 10px;
-    margin: 20px;
-    border-radius: 10px;
-    height: 230px;
-    width: 200px;
-    @media screen and (max-width: 768px) {
-      height: 160px;
-      width: 160px;
-      margin: 2px;
-      padding: 5px;
-      
+  padding: 10px;
+  margin: 20px;
+  border-radius: 10px;
+  height: 230px;
+  width: 200px;
+}
+
+@media screen and (max-width: 768px) {
+  .article-container {
+    height: 150px;
+    width: 150px;
+    margin: 20px auto; /* Center the container horizontally with 10px margin on top and bottom */
+    padding: 0;
+  }
+}
+
+
+  .py-2 {
+    padding-top: 1rem; /* or the desired value for large devices */
+    padding-bottom: 1rem; /* or the desired value for large devices */
+  }
+  
+  @media screen and (max-width: 768px) {
+    .py-2 {
+      padding-top: 0;
+      padding-bottom: 0;
     }
   }
+  
 
 .appContainer{
   display: flex;
@@ -24,8 +39,8 @@
   height: 100%;
 
   @media screen and (max-width: 768px) {
-    padding: 5px;
-    margin: 5px;
+    padding:0;
+    margin: 0;
   }
 }
 .leftDiv{
@@ -39,7 +54,7 @@
   @media  screen and (max-width: 768px) {
     width: auto;
     margin: 5px;
-    padding: 3px;
+    padding: 5px;
   }
 }
   
@@ -72,19 +87,28 @@
 
 .articleTitleSmall {
   margin-top: 7px; 
+  /*Reduce on small screens*/
+  @media screen and (max-width: 768px) {
+    margin-top: 0px; 
+    font-size: 13px;
+  }
 }
 
 .shortArticleText {
   margin-top: -9px; 
+  /*Hide on small screens*/
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 }
 .article-image img{
   width: 100%;
-  height: 30%;
+  height: 50%;
   border-radius: 10px;
   @media screen and (max-width: 768px) {
     width: 100%;
     height: 100%;
-    border-radius: 10px;
+   border-radius: 10px;
   }
 }
 .captionParagraph {
@@ -92,6 +116,11 @@
   color: white; 
   padding: 10px; 
   border-radius:  0 0 10px 10px;
+  /*Move a bit on top on smaller devices*/
+  @media screen  and (max-width: 768px) {
+    margin-top: -5px;
+    padding: 15px;
+  }
 }
 .tipsadjust img{
   border-radius: 10px 10px 0 0;

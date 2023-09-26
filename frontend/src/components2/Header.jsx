@@ -4,13 +4,28 @@ import {useSelector, useDispatch} from 'react-redux'
 import {useLogoutMutation } from '../slices/usersApiSlice'
 import { logout } from '../slices/authSlice'
 import { Link, useNavigate } from 'react-router-dom'
+import { Modal } from 'react-bootstrap'
+import {useState} from 'react'
 
+import { useGetCategoriesQuery} from '../slices/CategoryApiSlice'
 import { NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
 const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [showModal, setShowModal] = useState(false)
+
+  const {data: categories, error: categoryError, isLoading: categoryIsLoading} = useGetCategoriesQuery();
+
+  const handleModalOpen = () =>{
+    setShowModal(true)
+  }
+
+  const handleModalClose = () =>{
+    setShowModal(false)
+  }
+
 
   const {userInfo } = useSelector((state) => state.auth)
   
@@ -26,6 +41,7 @@ const Header = () => {
       console.log(error)
     }
   }
+
   return (
     <>
      <div className='top'>
@@ -38,16 +54,19 @@ const Header = () => {
          
 {userInfo ? (
   <NavDropdown className='topListItem'> 
-    
+    <div className="profiledropdownHolder">
     <Link to={`/profile/${userInfo.username}`}>
       <div>
         <NavDropdown.Item>Profile</NavDropdown.Item>
         <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
       </div>
     </Link>
+    </div>
   </NavDropdown>
 ) : (
-  <Link to='/'className='topListItem'> Article Africa</Link> 
+<div style={{ fontWeight: 'bold' }} className="articleAfricaLogo">
+  <Link to='/' className='topListItem'>Article Africa</Link>
+</div>
 )}
        {userInfo && userInfo.isAdmin && (
             <NavDropdown className='topListItem'>
@@ -68,8 +87,8 @@ const Header = () => {
             <ul className='topList'>
                 
                 <Link to="/" className='topListItem'>HOME</Link>
-                <li className='topListItem'>ABOUT</li>
-                <li className='topListItem'>CONTACT</li>
+                <Link to="/about" className='topListItem'>ABOUT</Link>
+               <Link to="/contact" className='topListItem'>CONTACT</Link>
             </ul>
 
          </div>
@@ -81,8 +100,47 @@ const Header = () => {
                
         </div>
         <div className='topFarRight'>
-            <FaBars className='topIcon' />
+            <FaBars className='topIcon' onClick={handleModalOpen}/>
         </div>
+        {/* Modal */}
+
+        <Modal 
+        show={showModal} 
+        onHide={handleModalClose} 
+        dialogClassName="modal-75w"
+        backdrop="static"
+        onClick={handleModalClose}
+        >
+          <Modal.Header className="modal-header" closeButton>
+           <div className='modal-header'> <Link to='/'>Home</Link> </div>
+          </Modal.Header>
+          <Modal.Body className="modal-body">
+            {/*Check if categories are loading */}
+            {categoryIsLoading && <div>Loading...</div>}
+            <h4>Topics</h4>
+            <div className='categoriesDiv'>
+              {categories &&
+                categories.map((category) => {
+                  return(
+                    <div key={category._id}>
+                      <Link to={`/category/${category.name}`}>
+                        <h5 className='categoryLinks'>{category.name}</h5>
+                      </Link>
+                    </div>
+                  )
+
+                })
+              }
+            </div>
+
+           </Modal.Body>
+           <Modal.Footer className="modal-footer">
+            {/*display About and Contact Link */}
+            <Link to='/about' className="modal-footer-links" >ABOUT</Link>
+            <Link to='/contact' className="modal-footer-links" >CONTACT</Link>
+            </Modal.Footer>
+          </Modal>
+        
      </div>
     </>
   )
