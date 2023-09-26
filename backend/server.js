@@ -22,16 +22,24 @@ app.use(cookieParser());
 app.use('/uploads', express.static(path.join(path.resolve(), '/uploads')))
 
 
-app.get('/', (req, res) => {
-    res.send('Server is ready');
-});
-
 app.use('/api/categories', CategoryRoutes);
 app.use('/api/upload', uploadRoutes);
 
 app.use('/api/articles', ArticleRoutes);
 
 app.use('/api/users', UserRoutes);
+
+
+const __dirname = path.resolve();
+app.use(
+    express.static(path.join(__dirname, '/frontend/build'))
+)
+app.get('*', (req, res) =>
+res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+)
+
+
+
 
 app.use(notFound)
 app.use(errorHandler)
