@@ -1,3 +1,4 @@
+
 import path from 'path';
 import express from 'express';
 import dotenv from 'dotenv';
@@ -7,41 +8,26 @@ import CategoryRoutes from './Routes/CategoryRoutes.js';
 import ArticleRoutes from './Routes/ArticleRoutes.js';
 import UserRoutes from './Routes/UserRoutes.js';
 import uploadRoutes from './Routes/uploadRoutes.js';
-
-
 import { notFound, errorHandler } from './middleware/errormiddleware.js';
 
 const app = express();
 dotenv.config();
 const PORT = process.env.PORT || 5000;
 
+connectDB();
+
 //use Json
 app.use(express.json());
 app.use(cookieParser());
-app.use('/api/upload', uploadRoutes);
+app.use('/uploads', express.static(path.join(path.resolve(), '/uploads')))
 
-if(process.env.NODE_ENV === 'production'){
-    const __dirname = path.resolve();
-   app.use(express.static(path.join(__dirname, '/frontend/build')));
-
-   //any route that is not api will be redirected to index.html
-   app.get('*', (req, res) => {
-       res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
-   })
-}else{
-    app.get('/', (req, res) => {
-        res.send('API is running');
-    })
-}
-
-
-connectDB();
 
 app.get('/', (req, res) => {
     res.send('Server is ready');
 });
 
 app.use('/api/categories', CategoryRoutes);
+app.use('/api/upload', uploadRoutes);
 
 app.use('/api/articles', ArticleRoutes);
 
