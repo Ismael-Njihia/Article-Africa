@@ -51,8 +51,8 @@
   flex-grow: 1;
   @media  screen and (max-width: 768px) {
     width: auto;
-    margin: 5px;
-    padding: 5px;
+    margin: 7px;
+    padding: 7px;
   }
 }
   
@@ -103,7 +103,7 @@
   height: 50%;
   border-radius: 10px;
   @media screen and (max-width: 768px) {
-    width: 80%;
+    width: 70%;
     height: 90%;
    border-radius: 10px;
   }
