@@ -11,8 +11,8 @@
 
 @media screen and (max-width: 768px) {
   .article-container {
-    height: 150px;
-    width: 150px;
+    height: 170px;
+    width: 300px;
     margin: 20px auto; /* Center the container horizontally with 10px margin on top and bottom */
     padding: 0;
   }
@@ -86,8 +86,13 @@
   margin-top: 7px; 
   /*Reduce on small screens*/
   @media screen and (max-width: 768px) {
-    margin-top: 0px; 
+    margin-top: 5px; 
     font-size: 13px;
+    font-weight: bold;
+    text-decoration: underline;
+    &:hover {
+      color: #8B4513;
+    }
   }
 }
 
@@ -103,8 +108,8 @@
   height: 50%;
   border-radius: 10px;
   @media screen and (max-width: 768px) {
-    width: 70%;
-    height: 90%;
+    width: 100%;
+    height: 100%;
    border-radius: 10px;
   }
 }

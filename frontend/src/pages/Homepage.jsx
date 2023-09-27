@@ -39,7 +39,7 @@ const Homepage = () => {
                 <Col key={article._id}>
                   <div className="article-container" style={{marginBottom: '10px'}}>
                     {/*Render the Image coming from the backend */}
-                    <div className="article-image" style={{height: "130px", overflow: "hidden"}}>
+                    <div className="article-image" style={{ height: "160px", overflow: "hidden"}}>
                       <img src={article.image} alt={article.title} style={{width: '100%', height: '100%', objectFit: "cover", objectPosition: "top"}}/>
                     </div>
                     <Link to={`/article/${article._id}`}>
