@@ -18,7 +18,7 @@ const Homepage = () => {
     <div className='appContainer' >
       <div className='leftDiv'>
         
-        <Row xs={2} md={3} lg={4}>
+        <Row xs={1} md={3} lg={4}>
           {data &&
             data.map((article) => {
               //Parse the HTML content to find and replace image links
