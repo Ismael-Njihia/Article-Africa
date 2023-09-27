@@ -11,18 +11,11 @@
 
 @media screen and (max-width: 768px) {
   .article-container {
-    height: 170px;
+    height: 200px;
     width: 300px;
     margin: 20px auto; /* Center the container horizontally with 10px margin on top and bottom */
-    padding: 0;
   }
 }
-
-
-  .py-2 {
-    padding-top: 1rem; /* or the desired value for large devices */
-    padding-bottom: 1rem; /* or the desired value for large devices */
-  }
   
   @media screen and (max-width: 768px) {
     .py-2 {
