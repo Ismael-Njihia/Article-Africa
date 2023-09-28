@@ -8,6 +8,7 @@
   height: 230px;
   width: 200px;
   @media screen and (max-width: 768px){
+    margin-top: 5px;
     height: 200px;
     width: 270px;
     margin: 20px auto; /* Center the container horizontally with 10px margin on top and bottom */
