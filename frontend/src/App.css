@@ -7,6 +7,12 @@
   border-radius: 10px;
   height: 230px;
   width: 200px;
+  @media screen and (max-width: 768px){
+    height: 200px;
+    width: 270px;
+    margin: 20px auto; /* Center the container horizontally with 10px margin on top and bottom */
+    
+  }
 }
 
 @media screen and (max-width: 768px) {
