@@ -28,7 +28,8 @@
     width: 95%; /* Reduce the width to 80% on small screens */
     margin: 0 auto; /* Center the container horizontally */
     overflow-x: hidden; /* Optionally, prevent horizontal scrolling */
-    padding: 0;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
 }
