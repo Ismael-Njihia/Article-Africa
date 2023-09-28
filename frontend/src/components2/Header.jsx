@@ -10,6 +10,7 @@ import {useState} from 'react'
 import { useGetCategoriesQuery} from '../slices/CategoryApiSlice'
 import { NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import logo from '../assets/logo-circle-removebg.png'
 
 const Header = () => {
   const dispatch = useDispatch()
@@ -64,8 +65,10 @@ const Header = () => {
     </div>
   </NavDropdown>
 ) : (
-<div style={{ fontWeight: 'bold' }} className="articleAfricaLogo">
-  <Link to='/' className='topListItem'>Article Africa</Link>
+<div  className="articleAfricaLogo">
+  <Link to='/' className='topListItem'>
+    <img src={logo} alt='Logo'/>
+    </Link>
 </div>
 )}
        {userInfo && userInfo.isAdmin && (
