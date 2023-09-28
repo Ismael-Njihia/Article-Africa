@@ -10,7 +10,7 @@ const App = () => {
   return (
     <>
     <Header />
-    <main  className='py-2'>
+    <main>
       <Container>
         <ToastContainer />
         <Outlet />
