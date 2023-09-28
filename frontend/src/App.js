@@ -11,10 +11,10 @@ const App = () => {
     <>
     <Header />
     <main>
-      <Container>
+      
         <ToastContainer />
         <Outlet />
-      </Container>
+      
     </main>
     </>
   )
