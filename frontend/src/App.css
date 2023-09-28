@@ -27,11 +27,11 @@
 .appContainer{
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 95%;
   height: 100%;
+  overflow-x: hidden;
   @media screen and (max-width: 768px) {
     height: 90%;
-    margin-right: 50px;
     width: 95%; /* Reduce the width to 80% on small screens */
     margin: 0 auto; /* Center the container horizontally */
     overflow-x: hidden; /* Optionally, prevent horizontal scrolling */

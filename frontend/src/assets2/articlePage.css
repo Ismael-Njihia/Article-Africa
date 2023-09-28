@@ -1,6 +1,8 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    
 }
 .articleTitle{
     color: #fff;
@@ -12,10 +14,20 @@
 }
 .ArticleDiv{
     width: 100%;
-    margin-left: 10px;
+    margin-left: 20px;
+    overflow-x: hidden;
     
     padding: 15px;
     color: #fff;
+
+    @media screen and (max-width: 768px) {
+        width: 97%;
+        margin-left: 0;
+        padding: 10px;
+        overflow-x: hidden;
+
+        
+    }
 }
 .ArticleDiv h1{
     font-size: 2.5rem;
