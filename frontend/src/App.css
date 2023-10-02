@@ -10,21 +10,17 @@
   width: 200px;
   @media screen and (max-width: 768px){
     margin-top: 5px;
-    height: 200px;
+    height: 300px;
     width: 270px;
-    margin: 20px auto; /* Center the container horizontally with 10px margin on top and bottom */
+    border: 0.5px solid var(--secondary-color);
+    /*Center in the screen*/
+    margin-left: auto;
+    margin-right: auto;
+  
     
   }
 }
 
-@media screen and (max-width: 768px) {
-  .article-container {
-    height: 200px;
-    width: 270px;
-    margin: 20px auto; /* Center the container horizontally with 10px margin on top and bottom */
-  }
-}
-  
 .appContainer{
   display: flex;
   flex-direction: row;
@@ -32,9 +28,8 @@
   height: 100%;
   overflow-x: hidden;
   @media screen and (max-width: 768px) {
-    height: 90%;
-    width: 95%; /* Reduce the width to 80% on small screens */
-    margin: 0 auto; /* Center the container horizontally */
+    height: 100%;
+    width: 100%; /* Reduce the width to 80% on small screens */
     overflow-x: hidden; /* Optionally, prevent horizontal scrolling */
   }
 
@@ -46,9 +41,11 @@
   border-radius: 10px;
   flex-grow: 1;
   @media  screen and (max-width: 768px) {
-    width: auto;
-    margin: 7px;
-    padding: 7px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    
   }
 }
   
@@ -81,7 +78,8 @@
 .shortArticleText{
   font-size: 10px;
   @media screen and (max-width: 768px) {
-    font-size: 8px;
+    font-size: 10px;
+    line-height: 2em;
   }
 }
 
@@ -103,7 +101,7 @@
   margin-top: -9px; 
   /*Hide on small screens*/
   @media screen and (max-width: 768px) {
-    display: none;
+    font-size: 10px;
   }
 }
 .article-image img{
@@ -114,7 +112,7 @@
     width: 100%;
     height: 100%;
    border-radius: 10px;
-   margin-top: 5px;
+  
   }
 }
 .captionParagraph {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect, useState} from 'react'
 import { useGetArticlesQuery } from '../slices/ArticlesApiSlice';
 import { useGetCategoriesQuery } from '../slices/CategoryApiSlice';
 import { Row, Col } from 'react-bootstrap'
@@ -10,8 +10,19 @@ import '../App.css'
 const Homepage = () => {
     const { data, error, isLoading } = useGetArticlesQuery();
     const {data: categories, error: articleError, isLoading: articleIsLoading} = useGetCategoriesQuery();
-    console.log(categories)
-    console.log(data, error, isLoading)
+    const [screenwidth, setScreenwidth] = useState(window.innerWidth);
+
+    const handleResize = () => {
+      setScreenwidth(window.innerWidth);
+    }
+
+    useEffect(() => {
+      window.addEventListener('resize', handleResize);
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      }
+    },[])
+    
     if (isLoading) return <div>Loading...</div>
   return (
     <>
@@ -33,22 +44,26 @@ const Homepage = () => {
                 ignoreHref: true,
                 ignoreImage: true,
               });
+              //limit the words based on the screen size
+              //if the screen size is less than 768px, limit the words to 125
+
+              const shortText = screenwidth < 768 ? text.length > 150 ? text.substring(0,190) + '...' : text : text.length > 55 ? text.substring(0,55) + '...' : text;
+
               
-              const shortText = text.length > 25 ? text.substring(0,55) + '...' : text; 
-              return(
+              return (
                 <Col key={article._id}>
-                  <div className="article-container" style={{marginBottom: '10px'}}>
-                    {/*Render the Image coming from the backend */}
-                    <div className="article-image" style={{ height: "160px", overflow: "hidden"}}>
-                      <img src={article.image} alt={article.title} style={{width: '100%', height: '100%', objectFit: "cover", objectPosition: "top"}}/>
+                  <Link to={`/article/${article._id}`} style={{ textDecoration: "none" }}>
+                    <div className="article-container" style={{ marginBottom: "10px" }}>
+                      {/* Render the Image coming from the backend */}
+                      <div className="article-image" style={{ height: "160px", overflow: "hidden" }}>
+                        <img src={article.image} alt={article.title} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
+                      </div>
+                      {article.title.length > 15 ? <p className="articleTitleSmall">{article.title.substring(0, 37) + "..."}</p> : <p>{article.title}</p>}
+                      <div className="shortArticleText">{shortText}</div>
                     </div>
-                    <Link to={`/article/${article._id}`}>
-                     {article.title.length > 25 ? <p className='articleTitleSmall'>{article.title.substring(0,37) + '...'}</p>: <p>{article.title}</p>}
-                    </Link>
-                    <div className='shortArticleText'>{shortText}</div>
-                  </div>
+                  </Link>
                 </Col>
-              )
+              );
             })
           }
         </Row>
