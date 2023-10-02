@@ -95,7 +95,7 @@ const ArticlePage = () => {
                 />
               </div>
               <div className="article-caption">
-                <p className="captionParagraph">{data.imageCaption}</p>
+                <p style={{color: "#fff"}} className="captionParagraph">{data.imageCaption}</p>
               </div>
               </div>
             )}
@@ -105,7 +105,7 @@ const ArticlePage = () => {
 
           <Col md={4}>
             {/* Right div with 20% width */}
-            <div className="detailDiv">
+            <div style={{color: "#fff"}} className="detailDiv">
               <p className="HoverBrownLeftRight">Category: <div style={{textDecoration: 'underline', marginLeft: '4px'}}><Link to={`/category/${category.name}`}>{category.name}</Link></div></p>
              {/* Addd a link to the name using the username */}
               <p className="HoverBrownLeftRight">Posted By: <div style={{textDecoration: 'underline', marginLeft: '4px'}}> <Link to={`/profile/${postedBy.username}`}>{postedBy.name}</Link> </div></p>

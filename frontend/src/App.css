@@ -1,5 +1,6 @@
 *{
   box-sizing: border-box;
+  
 }
 .article-container {
   padding: 10px;
@@ -56,6 +57,7 @@
   padding: 10px;
   margin: 25px;
   border-radius: 10px;
+  
   @media screen and (max-width: 768px) {
     display: none;
     padding: 0;
@@ -63,6 +65,12 @@
     width: auto;
   }
   
+}
+.rightDiv h4{
+  color: var(--secondary-color);
+}
+.categoryLinks h5{
+  color: var(--secondary-color);
 }
 .articleTitleSmall p{
   font-size: 12px;
@@ -111,7 +119,7 @@
 }
 .captionParagraph {
   background-color: #8B4513; 
-  color: white; 
+  color: white;
   padding: 10px; 
   border-radius:  0 0 10px 10px;
   /*Move a bit on top on smaller devices*/
@@ -132,7 +140,7 @@
 }
 
 .categoryLinks{
-  color: white; 
+  
   padding: 5px; 
   border-radius:  10px 10px 0 0;
   font-size: 14px;

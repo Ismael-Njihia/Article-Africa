@@ -5,7 +5,8 @@
     
 }
 .articleTitle{
-    color: #fff;
+    margin-left: 15px;
+    color: var(--secondary-color);
     margin-top: 5px;
     display: flex;
     align-items: center;
@@ -15,11 +16,8 @@
 .ArticleDiv{
     width: 100%;
     margin-left: 20px;
-    overflow-x: hidden;
-    
+    overflow-x: hidden; 
     padding: 15px;
-    color: #fff;
-
     @media screen and (max-width: 768px) {
         width: 97%;
         margin-left: 0;
@@ -33,19 +31,20 @@
     font-size: 2.5rem;
     font-weight: 600;
     margin-bottom: 1rem;
+    color: var(--secondary-color);
     
 }
 .ArticleDiv h2{
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: #fff;
+    color: var(--secondary-color);
 }
 .ArticleDiv p{
     font-size: 1.2rem;
     font-weight: 400;
     margin-bottom: 1rem;
-    color: #fff;
+    color: var(--secondary-color)
 }
 
 .detailDiv{

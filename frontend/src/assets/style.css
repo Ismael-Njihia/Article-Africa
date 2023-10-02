@@ -4,16 +4,9 @@
 }
 /*Color variables*/
 :root {
-    --primary-color: #004225;
-    --secondary-color: #1a1a1a;
-    --tertiary-color: #ffffff;
-    --quaternary-color: #ffffff80;
-    --quinary-color: #ffffff40;
-    --senary-color: #ffffff20;
-    --septenary-color: #ffffff10;
-    --octonary-color: #ffffff08;
-    --nonary-color: #ffffff04;
-    --denary-color: #ffffff02;
+    --primary-color: #f7f7f2;
+    --secondary-color: #333333;
+    
   }
   
   /*General*/
