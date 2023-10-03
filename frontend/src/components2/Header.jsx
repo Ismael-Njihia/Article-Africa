@@ -1,5 +1,5 @@
 import '../assets2/header.css'
-import {FaFacebookSquare, FaInstagramSquare, FaLinkedin, FaTwitterSquare, FaBars} from 'react-icons/fa'
+import {FaFacebookSquare, FaInstagramSquare, FaLinkedin, FaTwitterSquare, FaBars, FaSearch} from 'react-icons/fa'
 import {useSelector, useDispatch} from 'react-redux'
 import {useLogoutMutation } from '../slices/usersApiSlice'
 import { logout } from '../slices/authSlice'
@@ -16,6 +16,7 @@ const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [showModal, setShowModal] = useState(false)
+  const [searchModal, setSearchModal] = useState(false)
 
   const {data: categories, error: categoryError, isLoading: categoryIsLoading} = useGetCategoriesQuery();
 
@@ -25,6 +26,14 @@ const Header = () => {
 
   const handleModalClose = () =>{
     setShowModal(false)
+  }
+
+  const handleSearchModalOpen = () =>{
+    setSearchModal(true)
+  }
+
+  const handleSearchModalClose = () =>{
+    setSearchModal(false)
   }
 
 
@@ -102,6 +111,10 @@ const Header = () => {
                 <FaTwitterSquare className='topIcon' />
                
         </div>
+        {/*search Icon */}
+        <div style={{marginLeft: '10px', border: "0.5px solid #ccc",display:"flex",justifyContent:'center', padding: "5px"}} className='topFarRight'>
+            <FaSearch className='topIcon' onClick={handleSearchModalOpen} />
+        </div>
         <div className='topFarRight'>
             <FaBars className='topIcon' onClick={handleModalOpen}/>
         </div>
@@ -143,6 +156,27 @@ const Header = () => {
             <Link to='/contact' className="modal-footer-links" >CONTACT</Link>
             </Modal.Footer>
           </Modal>
+
+          {/* Search Modal */}
+
+          <Modal
+          show={searchModal}
+          onHide={handleSearchModalClose}
+          dialogClassName="modal-75w"
+          backdrop="static"
+        
+          >
+            <Modal.Header  closeButton>
+              <div>Search Articles</div>
+            </Modal.Header>
+            <Modal.Body className="modal-body">
+              <div className='searchDiv'>
+                <input type='text' placeholder='Search...' className='searchInput'/>
+                <button className='searchButton'>Search</button>
+              </div>
+            </Modal.Body>
+          </Modal>
+          
         
      </div>
     </>

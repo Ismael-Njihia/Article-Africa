@@ -10,9 +10,9 @@
   width: 200px;
   @media screen and (max-width: 768px){
     margin-top: 5px;
-    height: 300px;
-    width: 270px;
-    border: 0.5px solid var(--secondary-color);
+    height: 97%;
+    width: 90%;
+    border: 0.25px solid #ccc;
     /*Center in the screen*/
     margin-left: auto;
     margin-right: auto;
