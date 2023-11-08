@@ -128,6 +128,8 @@
         display: flex;
        flex-direction: column;
        padding: 5px;
+       margin-left: 3px;
+       font-size: 10px;
     }
   }
   .postedByName a {
@@ -149,7 +151,7 @@
     @media screen  and (max-width: 768px){
         display: flex;
        flex-direction: column;
-       font-size: 10px;
+       font-size: 7px;
        margin-top: 5px;
        margin-bottom: 5px;
     }

@@ -80,7 +80,7 @@ const ArticlePage = () => {
         <Row className="articleTitle">
           <h4>{title}</h4>
           {/*show posted by */}
-          <div className="postedByName"> <Link to={`/profile/${postedBy.username}`}>{postedBy.name}</Link> </div>
+          <div className="postedByName">  <Link to={`/profile/${postedBy.username}`}>{postedBy.name}</Link> </div>
           {/**Show time of Posting */}
           <div className="formatDate">{formattedCreatedAt}</div>
         </Row>
