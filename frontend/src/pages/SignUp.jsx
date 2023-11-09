@@ -19,7 +19,7 @@ const SignUp = () => {
 
   useEffect(()=>{
     if(userInfo){
-      navigate('/login')
+      navigate('/verification')
     }
   }, [userInfo, navigate])
   const handleFullName = (e) => {
@@ -100,9 +100,6 @@ const SignUp = () => {
                   />
                 </Form.Group>
                 <br/>
-
-               
-
                 <Button variant="primary" type="submit" block>
                   Sign Up
                 </Button>

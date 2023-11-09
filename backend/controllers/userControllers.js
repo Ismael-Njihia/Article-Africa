@@ -1,6 +1,8 @@
 import asyncHandler from "../middleware/asyncHandler.js";
 import User from "../models/UserModel.js";
 import generateToken from "../utils/generateToken.js";
+import generateVerificationCode from "../utils/generateVerification.js";
+import generateEmailVerificationCode from "../utils/generateEmail.js";
 
 const registerUser = asyncHandler(async (req, res) => {
     const { name, email, password } = req.body;
@@ -26,12 +28,19 @@ const registerUser = asyncHandler(async (req, res) => {
             res.status(400);
             throw new Error('Unable to generate a unique username');
         }
-
+        //create the verification code
+        let verificationCode = generateVerificationCode();
         // Use the unique username
-        user = await User.create({ name, email, password, username: uniqueUsername });
+        user = await User.create({ name, email, password, username: uniqueUsername, verificationCode });
+        //try to send the email
+        generateEmailVerificationCode(email, name, verificationCode);
     } else {
+        //create the verification code
+        let verificationCode = generateVerificationCode();
         // Use the original username
-        user = await User.create({ name, email, password, username });
+        user = await User.create({ name, email, password, username, verificationCode});
+        //try to send the email
+        generateEmailVerificationCode(email, name, verificationCode);
     }
 
     if (user) {

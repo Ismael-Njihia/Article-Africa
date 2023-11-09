@@ -45,7 +45,17 @@ const UserModel = mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Article'
         }
-    ]
+    ],
+    isVerified: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    verificationCode: {
+        type: String,
+        required: true,
+        default: '123456'
+    },
      
 }, {timestamps: true})
 

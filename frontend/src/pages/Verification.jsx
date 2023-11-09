@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import '../assets2/verification.css'
+import '../assets/verification.css'
 import { Row, Col } from 'react-bootstrap'
 
 const Verification = () => {
@@ -34,8 +34,8 @@ const Verification = () => {
     
     <div>
         
-        <div className='container'>
-        <form>
+        <div className='containerwrap'>
+        <form className='formVerification'>
             
             <Row>
                 <Row>
@@ -47,6 +47,7 @@ const Verification = () => {
                 <Col>
                 {verificationCode.map((value, index) => (
                     <input
+                    className='inputVerification'
                     key={index}
                     type="text"
                     name="verificationCode"

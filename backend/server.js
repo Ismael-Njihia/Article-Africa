@@ -8,6 +8,7 @@ import CategoryRoutes from './Routes/CategoryRoutes.js';
 import ArticleRoutes from './Routes/ArticleRoutes.js';
 import UserRoutes from './Routes/UserRoutes.js';
 import uploadRoutes from './Routes/uploadRoutes.js';
+import verificationRoute from './Routes/verificationRoute.js';
 import { notFound, errorHandler } from './middleware/errormiddleware.js';
 
 const app = express();
@@ -28,6 +29,7 @@ app.use('/api/upload', uploadRoutes);
 app.use('/api/articles', ArticleRoutes);
 
 app.use('/api/users', UserRoutes);
+app.use('/api/verification', verificationRoute);
 
 
 const __dirname = path.resolve();

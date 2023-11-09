@@ -1,17 +1,18 @@
-.container {
+.containerwrap {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 70vh; /* 100% viewport height */
+    height: 100vh; /* 100% viewport height */
+    width: 100vw; /* 100% viewport width */
   }
 
-  form {
+  .formVerification {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
   }
-  input{
+  .inputVerification{
     height: 70px;
     width: 40px;
     margin: 10px;
