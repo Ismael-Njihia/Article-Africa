@@ -1,10 +1,26 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect, useCallback} from 'react'
 import '../assets/verification.css'
 import { Row, Col } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
+import { useVerifyMutation } from '../slices/verificationApiSlice'
+import {useSelector} from 'react-redux'
+import { toast } from 'react-toastify'
 
 const Verification = () => {
     const [verificationCode, setVerificationCode] = useState(['', '', '', '', '', ''])
-    
+    const navigate = useNavigate();
+    const [verify, { isLoading, error }] = useVerifyMutation();
+    const [verificationAttempted, setVerificationAttempted] = useState(false);
+
+    const {userInfo} = useSelector((state) => state.auth)
+    const email = userInfo.email
+    const isVerified = userInfo.isVerified
+     
+    console.log(isVerified)
+    if(isVerified){
+        navigate('/')
+    }
+   
     const handleChange = (index, value) =>{
         const newVerificationCode = [...verificationCode];
         newVerificationCode[index] = value;
@@ -21,15 +37,39 @@ const Verification = () => {
         }
     }
     //check if all the six boxes are filled
-    const isAllFilled = () =>{
+    const isAllFilled = useCallback(() =>{
         return verificationCode.every((value) => value !== '');
-    }
-    if(isAllFilled()){
+    }, [verificationCode])
+
+    // if(isAllFilled()){
        
-         setTimeout(() => {
-              alert(verificationCode.join(''));
-         }, 1000);
-    }
+    //      setTimeout(() => {
+    //           alert(verificationCode.join(''));
+    //      }, 1000)
+         
+    // }
+    
+    //check if is loading
+    useEffect(() => {
+        if (error && verificationAttempted) {
+            console.log(error)
+            setVerificationAttempted(false)
+        }
+        if(isAllFilled() && !verificationAttempted){
+            verify({email, verificationCode: verificationCode.join('')})
+            .unwrap()
+            .then((data) => {
+                toast.success(data.message)
+                navigate('/article/create')
+            })
+            .catch((err) => {
+                toast.error(err.data.message)
+                setVerificationAttempted(true)
+            })
+        }
+      
+
+    },[verificationCode, error, navigate, verify, email, isAllFilled, verificationAttempted])
   return (
     
     <div>
@@ -40,6 +80,8 @@ const Verification = () => {
             <Row>
                 <Row>
                 <Col>
+                {/** show loader */}
+                {isLoading && <p>Verifying...</p>}
                     <h5>Verification</h5>
                     <p>Please enter the verification code sent to your email</p>
                 </Col>

@@ -52,7 +52,8 @@ const registerUser = asyncHandler(async (req, res) => {
             email: user.email,
             isAdmin: user.isAdmin,
             userType: user.userType,
-            username: user.username, 
+            username: user.username,
+            isVerified: user.isVerified,
         });
     } else {
         res.status(400);
@@ -74,6 +75,7 @@ const login = asyncHandler(async (req, res) => {
         email: user.email,
         isAdmin: user.isAdmin,
         username: user.username,
+        isVerified: user.isVerified,
     })
     }
     else{

@@ -41,11 +41,12 @@ const routes = createBrowserRouter(
       <Route path="/signup" element={<SignUp />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/contact" element={<ContactPage />} />
-      <Route path="/verification" element={<Verification />} />
+      
       
     <Route path='/' element={<PrivateRoute />}>
       <Route path="/article/create" element={<CreateArticlePage />} />
       <Route path="/article/edit/:id" element={<EditArticlePage />} />
+      <Route path="/verification" element={<Verification />} />
       
     </Route>
 

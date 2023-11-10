@@ -17,13 +17,14 @@ const generateEmailVerificationCode = async (email, name, verificationCode) => {
             to: `${name} <${email}>`,
             subject: 'Email Verification Code',
             text: 'Email Verification Code',
-            html: `<p style="background-color: #000; color: #fff; padding: 20px">
+            html: `<p style="background-color: #000; color: #fff; padding: 20px; font-size: 20px;">
             <br>
             <strong>Hi ${name},</strong>
             <br>
             <br>
 
-            Thank you for registering on Article Africa. Your verification code is <strong style="color: #fff;">${verificationCode}</strong>
+            Thank you for registering on Article Africa. Please use the verification code below to verify your email address.
+            Your verification code is <strong style="color: #fff;">${verificationCode}</strong>
             <br>
             <br>
             
