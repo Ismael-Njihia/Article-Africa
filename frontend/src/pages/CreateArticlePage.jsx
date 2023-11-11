@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {useCreateArticleMutation, useUploadArticleImageMutation} from '../slices/ArticlesApiSlice'
 import {toast} from 'react-toastify'
+import {useSelector } from 'react-redux'
 
 
 const CreateArticlePage = () => {
@@ -20,6 +21,16 @@ const CreateArticlePage = () => {
 
   const [createArticle, {isLoading: loadingCreate}] = useCreateArticleMutation()
   const [uploadArticleImage, {isLoading: loadingUpload}] = useUploadArticleImageMutation()
+  const {userInfo} = useSelector((state) => state.auth);
+
+  useEffect(()=>{
+   
+     setTimeout(() => {
+      if(userInfo && !userInfo.isVerified){
+        toast.info('Please verify your email address To continue. Check your email for the verification code')
+       }
+     }, 3000);
+  })
 
   const uploadFileHandler = async(e) =>{
     const formData = new FormData();
@@ -193,7 +204,10 @@ const CreateArticlePage = () => {
               </Form>
               
             </Card.Body>
-            <Button variant="primary" className= "sm" onClick={createProductHandler} type="submit" block disabled={loadingCreate}>
+            <Button variant="primary" 
+            disabled={ loadingCreate || loadingUpload}
+
+            className= "sm" onClick={createProductHandler} type="submit" block>
                     Publish Article
                   </Button>
               

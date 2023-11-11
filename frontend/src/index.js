@@ -26,6 +26,7 @@ import ProfilePage from './pages/ProfilePage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import Verification from './pages/Verification';
+import MassEmailer from './pages/MassEmailer';
 
 
 
@@ -41,7 +42,7 @@ const routes = createBrowserRouter(
       <Route path="/signup" element={<SignUp />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/contact" element={<ContactPage />} />
-      
+     
       
     <Route path='/' element={<PrivateRoute />}>
       <Route path="/article/create" element={<CreateArticlePage />} />
@@ -52,6 +53,7 @@ const routes = createBrowserRouter(
 
       <Route path='/' element={<AdminRoute />}>
       <Route path='/admin/userslist' element={<UsersListPage />} />
+      <Route path="/sendemails" element={<MassEmailer />} />
     </Route>
 
     </Route>

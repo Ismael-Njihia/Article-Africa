@@ -20,8 +20,15 @@ const Login = () => {
   const sp = new URLSearchParams(search);
   const redirect = sp.get('redirect') || '/article/create';
 
+// if userInfo exists and check if is verified
+useEffect(()=>{
+  if(userInfo && !userInfo.isVerified){
+   toast.info('Please verify your email address to continue. Check your email for the verification code')
+  }
+}, [userInfo])
+
   useEffect(()=>{
-    if(userInfo){
+    if(userInfo ){
       navigate(redirect)
     }
 
