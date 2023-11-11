@@ -3,7 +3,8 @@ import '../assets/verification.css'
 import { Row, Col } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { useVerifyMutation } from '../slices/verificationApiSlice'
-import {useSelector} from 'react-redux'
+import { setCredentials } from '../slices/authSlice'
+import {useSelector,useDispatch} from 'react-redux'
 import { toast } from 'react-toastify'
 
 const Verification = () => {
@@ -11,6 +12,7 @@ const Verification = () => {
     const navigate = useNavigate();
     const [verify, { isLoading, error }] = useVerifyMutation();
     const [verificationAttempted, setVerificationAttempted] = useState(false);
+    const dispatch = useDispatch()
 
     const {userInfo} = useSelector((state) => state.auth)
     const email = userInfo.email
@@ -18,7 +20,7 @@ const Verification = () => {
      
     console.log(isVerified)
     if(isVerified){
-        navigate('/')
+        navigate('/article/create')
     }
    
     const handleChange = (index, value) =>{
@@ -60,6 +62,8 @@ const Verification = () => {
             .unwrap()
             .then((data) => {
                 toast.success(data.message)
+                //update the user info on the store about the verification
+                dispatch(setCredentials({...userInfo, isVerified: true}))
                 navigate('/article/create')
             })
             .catch((err) => {
@@ -69,7 +73,7 @@ const Verification = () => {
         }
       
 
-    },[verificationCode, error, navigate, verify, email, isAllFilled, verificationAttempted])
+    },[verificationCode, error, navigate, verify, email, isAllFilled, verificationAttempted, dispatch, userInfo])
   return (
     
     <div>

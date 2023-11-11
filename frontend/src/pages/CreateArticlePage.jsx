@@ -205,8 +205,7 @@ const CreateArticlePage = () => {
               
             </Card.Body>
             <Button variant="primary" 
-            disabled={ loadingCreate || loadingUpload}
-
+            disabled={(userInfo && !userInfo.isVerified) || loadingCreate || loadingUpload}
             className= "sm" onClick={createProductHandler} type="submit" block>
                     Publish Article
                   </Button>
