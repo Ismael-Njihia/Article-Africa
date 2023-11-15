@@ -5,6 +5,8 @@ import { Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { htmlToText } from 'html-to-text';
 import '../App.css'
+import Spinner from  '../components2/Spinner'
+import { toast } from 'react-toastify';
 
 
 const Homepage = () => {
@@ -23,9 +25,23 @@ const Homepage = () => {
       }
     },[])
     
-    if (isLoading) return <div>Loading...</div>
+     if (isLoading) {
+      return (
+        <div className='spinnerDiv'>
+           <Spinner />
+         </div>
+       );
+     }
+   
   return (
     <>
+    {
+      error && toast.error(error.message)
+    }
+    {
+      articleError && toast.error(articleError.message)
+    }
+   
     <div className='appContainer' >
       <div className='leftDiv'>
         

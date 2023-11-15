@@ -7,6 +7,7 @@ import '../App.css'
 
 import {Link} from 'react-router-dom'
 import { Row } from 'react-bootstrap'
+import Spinner from '../components2/Spinner';
 
 const CategoryPage = () => {
 
@@ -16,7 +17,7 @@ const CategoryPage = () => {
     const {data: allCategories, isLoading: allCategoriesLoading} = useGetCategoriesQuery();
    
     const [articles, setArticles] = useState([]);
-    console.log(articles)
+    
 
     //sending array of article ids to getManyArticles
     const [getManyArticles, {data: articleData, error: gettingArticleError, isLoading: articleLoading}] = useGetManyArticlesMutation();
@@ -34,13 +35,13 @@ const CategoryPage = () => {
     }
     }, [categoriesData])
 
-    if(categoryLoading) return <div>Loading...</div>
+    if(categoryLoading) return <div className='spinnerDiv'> <Spinner/> </div>
 
     if(gettingCategoryError) return <div>Error getting category</div>
 
     if(categoriesData && categoriesData.articles.length === 0) return <div>No articles found in this Category</div>
     
-    if(articleLoading) return <div>Loading articles...</div>
+    if(articleLoading) return <div className='spinnerDiv'> <Spinner/> </div>
 
   return (
     <>

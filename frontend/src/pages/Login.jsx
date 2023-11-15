@@ -23,7 +23,7 @@ const Login = () => {
 // if userInfo exists and check if is verified
 useEffect(()=>{
   if(userInfo && !userInfo.isVerified){
-   toast.info('Please verify your email address to continue. Check your email for the verification code')
+   toast.info('Please verify your email address. Check your email for the verification code')
   }
 }, [userInfo])
 

@@ -5,6 +5,8 @@ import {useRegisterMutation } from '../slices/usersApiSlice';
 import {setCredentials} from '../slices/authSlice'
 import {toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import Login from './Login';
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
   const [name, setName] = useState('');
@@ -103,6 +105,13 @@ const SignUp = () => {
                 <Button variant="primary" type="submit" block>
                   Sign Up
                 </Button>
+
+                <br/>
+                <div className="text-center">
+                 {/**Link to login Page */}
+                  <Link to="/login">Already have an account? <p style={{color: 'blue'}}>Login</p></Link>
+
+                </div>
               </Form>
             </Card.Body>
           </Card>

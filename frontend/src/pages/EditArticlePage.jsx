@@ -8,6 +8,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import Spinner from '../components2/Spinner';
 
 const EditArticlePage = () => {
     const {id} = useParams()
@@ -80,7 +81,7 @@ const EditArticlePage = () => {
   return (
     <>
     {
-      isLoading && <p>Loading...</p>
+      isLoading && <div className='spinnerDiv'> <Spinner/> </div>
     }
     {
       error && toast.error(error.message)

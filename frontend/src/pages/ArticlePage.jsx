@@ -7,6 +7,7 @@ import he from "he";
 import '../assets2/articlePage.css';
 import {useSelector} from 'react-redux'
 import { toast } from "react-toastify";
+import Spinner from "../components2/Spinner";
 
 const ArticlePage = () => {
   const { id: articleId } = useParams();
@@ -75,6 +76,8 @@ const ArticlePage = () => {
 
   const modifiedHTML = wrapImageswithContainers(parsedBody);
 
+  //check if the article is loading
+
     return (
       <>
         <Row className="articleTitle">
@@ -140,7 +143,7 @@ const ArticlePage = () => {
       </>
     );
   } else {
-    return <div>Loading...</div>;
+    return <div className="spinnerDiv"> <Spinner/> </div>
   }
 };
 
