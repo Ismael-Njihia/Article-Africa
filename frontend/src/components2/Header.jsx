@@ -76,7 +76,7 @@ const Header = () => {
 ) : (
 <div  className="articleAfricaLogo">
   <Link to='/' className='topListItem'>
-    <img src={logo} alt='Logo'/>
+    <h5 className='logoName'>Article Africa</h5>
     </Link>
 </div>
 )}

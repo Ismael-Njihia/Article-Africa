@@ -3,7 +3,6 @@
     justify-content: center;
     align-items: center;
     height: 100vh; /* 100% viewport height */
-    width: 100vw; /* 100% viewport width */
   }
 
   .formVerification {
@@ -29,7 +28,8 @@
     margin: 10px;
 
   }
-  p{
+ 
+  .verificationParagraph{
     font-size: 15px;
     font-weight: normal;
     margin: 10px;

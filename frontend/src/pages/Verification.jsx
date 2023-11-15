@@ -67,7 +67,7 @@ const Verification = () => {
                 navigate('/article/create')
             })
             .catch((err) => {
-                toast.error(err.data.message)
+                toast.info(err.data.message)
                 setVerificationAttempted(true)
             })
         }
