@@ -87,7 +87,7 @@ const Verification = () => {
                 {/** show loader */}
                 {isLoading && <p>Verifying...</p>}
                     <h5>Verification</h5>
-                    <p>Please enter the verification code sent to your email</p>
+                    <p className='verificationParagraph'>Please enter the verification code sent to your email</p>
                 </Col>
                 </Row>
                 <Col>

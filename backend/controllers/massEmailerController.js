@@ -1,9 +1,15 @@
 import asyncHandler from "../middleware/asyncHandler.js";
 import User from "../models/UserModel.js";
 import nodemailer from "nodemailer";
+import { fileURLToPath } from "url";
+import {dirname} from "path";
+import fs from "fs";
+import path from "path";
+
 
 export const sendEmail = asyncHandler(async(req,res)=>{
    const {subject, message} = req.body;
+   console.log(subject, message);
 
    //find verified users
     const users = await User.find({isVerified: true});
@@ -27,7 +33,16 @@ const sendEmails = async (email, name, subject, message) => {
             user: '2003701@students.kcau.ac.ke',
             pass: 'Njihia7507?'	
         }
-    })
+    });
+    //load the Italianno font
+    //const fontBuffer = fs.readFileSync('../utils/Italianno-Regular.ttf');
+    const currentFileURL = import.meta.url;
+    const currentFilePath = fileURLToPath(currentFileURL);
+    const currentDir = dirname(currentFilePath);
+
+    const fontPath = path.join(currentDir, '../utils/Italianno-Regular.ttf')
+    const fontBuffer = fs.readFileSync(fontPath);
+    const fontBase64 = fontBuffer.toString('base64');
     //message object
     let mail = {
         from: 'Article Africa <2003701@students.kcau.ac.ke>',
@@ -46,9 +61,16 @@ const sendEmails = async (email, name, subject, message) => {
             
             <em>Regards,</em>
             <br>
-            <em>Article Africa</em>
+            <em style="font-family: 'Italianno', cursive; color: #2A9404; font-size: 30px; margin-top: 5px; ">Article Africa</em>
         </p>
         `,
+        attachements: [
+            {
+                filename: 'Italianno-Regular.ttf',
+                content: fontBase64,
+                encoding: 'base64'
+            }
+        ]
     };
 
     //send the email

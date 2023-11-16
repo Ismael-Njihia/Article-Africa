@@ -5,7 +5,7 @@ import {useRegisterMutation } from '../slices/usersApiSlice';
 import {setCredentials} from '../slices/authSlice'
 import {toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import Login from './Login';
+import Spinner from '../components2/Spinner';
 import { Link } from 'react-router-dom';
 
 const SignUp = () => {
@@ -54,7 +54,9 @@ const SignUp = () => {
   return (
    <>
    {
-    isLoading && <div>Loading.... </div>
+    isLoading && <div className='spinnerDiv'>
+      <Spinner />
+       </div>
    }
     
       <Row className="justify-content-center mt-5">

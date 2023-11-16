@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLoginMutation } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
 import {toast} from 'react-toastify'
+import Spinner from '../components2/Spinner'
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -56,10 +57,15 @@ useEffect(()=>{
 
     
   };
+  
+
 
   return (
+  
     <Container fluid>
-     
+       {
+      isLoading && <div className='spinnerDiv'> <Spinner/></div>
+    }
       <Row className="justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
         <Col xs={12} md={6} lg={4}>
         <h4 style={{textAlign: 'center'}}>Article Africa (AA) Writer's Account</h4>
@@ -94,9 +100,7 @@ useEffect(()=>{
                 <Button variant="primary" type="submit" disabled={isLoading} block>
                   Login
                 </Button>
-                {
-                  isLoading && <div>Loading...</div>
-                }
+                
               </Form>
             </Card.Body>
           </Card>

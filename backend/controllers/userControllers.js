@@ -6,6 +6,12 @@ import generateEmailVerificationCode from "../utils/generateEmail.js";
 
 const registerUser = asyncHandler(async (req, res) => {
     const { name, email, password } = req.body;
+    //check if email exists
+    let checkEmail = await User.findOne({email});
+    if(checkEmail){
+        res.status(400);
+        throw new Error("Email already exists");
+    }
 
     // Remove spaces from the name and convert to lowercase
     const username = name.replace(/\s/g, '').toLowerCase();

@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import {Container, Row, Col, Card, Form, Button} from 'react-bootstrap';
 import { useSendEmailMutation } from '../slices/massEmailerApiSlice';
 import {toast} from 'react-toastify'
+import Spinner from '../components2/Spinner';
 
 const MassEmailer = () => {
     const[subject,setSubject] = useState('')
@@ -27,11 +28,14 @@ const MassEmailer = () => {
   return (
     <>
     <Container className='mt-5'>
+        {
+            loadingSend && <div className='spinnerDiv'> <Spinner/></div>
+        }
         <h3 style={{textAlign: 'center'}}>Send a Mass Email</h3>
         <Row className='justify-content-center'>
             <Col md={8}>
                 <Card style={{height: '430px'}}>
-                    {loadingSend && <h3>sending...</h3>}
+                    
                     <Card.Body>
                         <Form>
                             <Form.Group>

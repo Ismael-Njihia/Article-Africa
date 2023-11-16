@@ -10,7 +10,7 @@ import {useState} from 'react'
 import { useGetCategoriesQuery} from '../slices/CategoryApiSlice'
 import { NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import logo from '../assets/logo-circle-removebg.png'
+
 
 const Header = () => {
   const dispatch = useDispatch()
