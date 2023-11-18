@@ -71,13 +71,13 @@
   color: var(--secondary-color);
 }
 .articleTitleSmall p{
-  font-size: 12px;
+  font-size: 8px;
   @media screen and (max-width: 768px) {
     font-size: 10px;
   }
 }
 .shortArticleText{
-  font-size: 12px;
+  font-size: 10px;
   @media screen and (max-width: 768px) {
     font-size: 10px;
     line-height: 2em;

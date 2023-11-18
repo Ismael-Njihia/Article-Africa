@@ -68,7 +68,7 @@ const Homepage = () => {
               //check if the article tittle is greater than 15 characters
               //if yes, the small screen will display only 55 characters
               //else, the screen will display 37 characters
-              const articleTitle = screenwidth < 768 ? article.title.length > 15 ? article.title.substring(0, 75) + "..." : article.title : article.title.length > 15 ? article.title.substring(0, 30) + "..." : article.title;
+              const articleTitle = screenwidth < 768 ? article.title.length > 15 ? article.title.substring(0, 75) + "..." : article.title : article.title.length > 15 ? article.title.substring(0, 25) + "..." : article.title;
 
               
               return (
