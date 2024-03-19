@@ -8,6 +8,9 @@ import '../App.css'
 import Spinner from  '../components2/Spinner'
 import { toast } from 'react-toastify';
 
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9904561648370283"
+     crossorigin="anonymous"></script>
+
 
 const Homepage = () => {
     const { data, error, isLoading } = useGetArticlesQuery();
